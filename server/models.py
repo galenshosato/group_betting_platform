@@ -20,7 +20,7 @@ class User(db.Model):
             "email": self.email,
             "money": self.money,
             "bets": {"current_bets": [current_bet.to_dict() for current_bet in self.bets],
-                     "past_bets": [past_bet.to_dict() for past_bet in self.bets if past_bet.updated_at != datetime.utcnow]
+                     "past_bets": [past_bet.to_dict() for past_bet in self.bets if past_bet.updated_at != past_bet.created_at]
                      }
         }
 
