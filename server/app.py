@@ -1,9 +1,11 @@
-from flask import Flask, jsonify, request, make_response, session as browser_session
+from flask import Flask, jsonify, request, make_response, Response, session as browser_session
 from extensions import *
+from models import User, Bet   
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://username:password@host:port/database_name'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+# mysql://username:password@host:port/database_name for mySQL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 app.secret_key = 'woohoo secret key'
