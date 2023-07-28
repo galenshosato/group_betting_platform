@@ -68,13 +68,22 @@ def change_password():
     user.password = new_password
     db.session.commit()
 
-# Getting users and adding a new user for dev
-@app.route('/api/users', methods=['GET','POST'])
+# Getting users, updating the weekly money, adding a new user by the dev
+@app.route('/api/users', methods=['GET', 'PATCH', 'POST'])
 def get_users():
+    users = User.query.all()
     if request.method == 'GET':
-        users = User.query.all()
-        user_dict = [user.to_dict() for user in users]
-        return make_response(jsonify(user_dict), 200)
+        users_dict = [user.to_dict() for user in users]
+        return make_response(jsonify(users_dict), 200)
+   
+    elif request.method =='PATCH':
+        for user in users:
+            user.weekly_money = 100000
+        db.session.add_all(users)
+        db.session.commit()
+        users_to_dict = [user.to_dict() for user in users]
+        return make_response(jsonify(users_to_dict), 200)
+
     elif request.method == 'POST':
         new_user = User()
         data = request.get_json()
@@ -86,13 +95,14 @@ def get_users():
 
         return make_response(jsonify(new_user.to_dict()), 200)
 
-# Getting bet information and adding a bet
+# Get all bets that a user has placed
 @app.route('/api/<int:id>/bets')
 def get_bets_by_id(id):
     user = User.query.filter_by(id=id).first()
     bets = [bet.to_dict() for bet in user.bets]
     return make_response(jsonify(bets), 200)
 
+# Get current bets for a user and add a bet for a user
 @app.route('/api/<int:id>/currentbets', methods=['GET','POST'])
 def get_current_bets(id):
     user = User.query.filter_by(id=id).first()
@@ -108,15 +118,49 @@ def get_current_bets(id):
         for field in data:
             setattr(new_bet, field, data[field])
         db.session.add(new_bet)
+        amount_wagered = data.get("amount")
+        weekly_change = (user.weekly_money) - amount_wagered
+        user.weekly_money = weekly_change
+        db.session.add(user)
         db.session.commit()
         return make_response(jsonify(new_bet.to_dict()), 200)
 
+#Get a list of the past bets for a user
 @app.route('/api/<int:id>/pastbets')
 def get_past_bets(id):
     user = User.query.filter_by(id=id).first()
     past_bets = user.bets['past_bets']
     past_bets_dict = [bet.to_dict() for bet in past_bets]
     return make_response(jsonify(past_bets_dict), 200)
+
+# Getting a specific bet, updating hit to True or False, deleting a bet
+@app.route('/api/<int:id>/currentbet/<int:bet_id>', methods =['GET', 'PATCH', 'DELETE'])
+def get_bet(id, bet_id):
+    user = User.query.filter_by(id=id).first()
+    bet = Bet.query.filter(Bet.id == bet_id, Bet.user_id == id ).first()
+
+    if request.method == 'GET':
+        bet_dict = bet.to_dict()
+        return make_response(jsonify(bet_dict), 200)
+    
+    elif request.method == 'PATCH':
+        data = request.get_json()
+        hit_response = data.get('hit')
+        for field in data:
+            setattr(bet, field, data[field])
+        db.session.add(bet)
+        if hit_response == True:
+            user.money += bet.winnings
+            db.session.add(user)
+        db.session.commit()
+        return make_response(jsonify(bet.to_dict()), 200)
+    
+    elif request.method =='DELETE':
+        db.session.delete(bet)
+        db.session.commit()
+        return make_response(jsonify({'Delete': 'You have successfully deleted this bet!'}), 200)
+
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
