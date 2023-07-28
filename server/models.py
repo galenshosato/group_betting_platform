@@ -9,6 +9,7 @@ class User(db.Model):
     email = db.Column(db.String)
     password = db.Column(db.String)
     money = db.Column(db.Integer)
+    weekly_money = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
     bets = db.relationship('Bet', backref='user')
@@ -19,6 +20,7 @@ class User(db.Model):
             "name": self.name,
             "email": self.email,
             "money": self.money,
+            "weekly_money": self.weekly_money,
             "bets": {"current_bets": [current_bet.to_dict() for current_bet in self.bets],
                      "past_bets": [past_bet.to_dict() for past_bet in self.bets if past_bet.updated_at != past_bet.created_at]
                      }
