@@ -104,13 +104,13 @@ def get_bets_by_user_id(id):
     return make_response(jsonify(bets), 200)
 
 # Get current bets for a user and add a bet for a user
-@app.route('/api/<int:id>/currentbets', methods=['GET','POST'])
+@app.route('/api/<int:id>/current-weekly-bets', methods=['GET','POST'])
 def get_current_bets(id):
+    bets = Bet.query.filter(Bet.user_id == id, Bet.created_at == Bet.updated_at).all()
     user = User.query.filter_by(id=id).first()
 
     if request.method == 'GET':
-        current_bets = user.bets
-        current_bets_dict = [bet.to_dict() for bet in current_bets]
+        current_bets_dict = [bet.to_dict() for bet in bets if bet.bet_type != 'futures']
         return make_response(jsonify(current_bets_dict), 200)
     
     elif request.method =='POST':
@@ -126,11 +126,19 @@ def get_current_bets(id):
         db.session.commit()
         return make_response(jsonify(new_bet.to_dict()), 200)
 
+# Get a list of the active futures bets for a user
+@app.route('/api/<int:id>/current-futures-bets', methods=['GET','POST'])
+def get_futures_bets(id):
+    futures_bets = Bet.query.filter(Bet.user_id == id, Bet.bet_type == 'futures').all()
+
+    if request.method =='GET':
+        futures_bets_to_dict = [futures_bet.to_dict() for futures_bet in futures_bets]
+        return make_response(jsonify(futures_bets_to_dict), 200)
+
 #Get a list of the past bets for a user
-@app.route('/api/<int:id>/pastbets')
+@app.route('/api/<int:id>/past-bets')
 def get_past_bets(id):
-    user = User.query.filter_by(id=id).first()
-    past_bets = user.bets['past_bets']
+    past_bets = Bet.query.filter(User.id==id, Bet.created_at != Bet.updated_at).all()
     past_bets_dict = [bet.to_dict() for bet in past_bets]
     return make_response(jsonify(past_bets_dict), 200)
 

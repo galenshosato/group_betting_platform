@@ -95,16 +95,15 @@ class TestAPI(TestCase):
     
     def test_get_current_bets(self):
         user = User(id = 1, name = 'user1', weekly_money = 50000)
-        bet1 = Bet(amount= 100, winnings = 200, user_id = user.id)
-        bet2 = Bet(amount = 500, winnings = 300, user_id = user.id)
+        bet1 = Bet(amount= 100, winnings = 200, bet_type = 'prop', user_id = user.id)
+        bet2 = Bet(amount = 500, winnings = 300, bet_type = 'fuberes', user_id = user.id)
         db.session.add(user)
         db.session.add_all([bet1, bet2])
         db.session.commit()
 
-        response = self.client.get(f'/api/{user.id}/currentbets')
+        response = self.client.get(f'/api/{user.id}/current-weekly-bets')
         self.assertEqual(response.status_code, 200)
         data = json.loads(response.data)
-        print(data)
         self.assertEqual(data[0]['amount'], 100)
         self.assertEqual(data[1]['winnings'], 300)
 
