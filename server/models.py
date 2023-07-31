@@ -14,8 +14,8 @@ class User(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
     bets = db.relationship('Bet', backref='user')
 
-    # def __repr__(self):
-    #     return f"<User name={self.name} weekly_money={self.weekly_money}>"
+    def __repr__(self):
+        return f"<User name={self.name} weekly_money={self.weekly_money} bets = {self.bets.current_bets}>"
 
     def to_dict(self):
         return {
@@ -29,8 +29,6 @@ class User(db.Model):
                      }
         }
 
-    def __repr__(self):
-        return f"<User {self.name}>"
     
 class Bet(db.Model):
     __tablename__ = 'bets'

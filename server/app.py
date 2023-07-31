@@ -67,6 +67,7 @@ def change_password():
     #Update the password
     user.password = new_password
     db.session.commit()
+    return make_response(jsonify(user.to_dict()), 200)
 
 # Getting users, updating the weekly money, adding a new user by the dev
 @app.route('/api/users', methods=['GET', 'PATCH', 'POST'])
@@ -97,7 +98,7 @@ def get_users():
 
 # Get all bets that a user has placed
 @app.route('/api/<int:id>/bets')
-def get_bets_by_id(id):
+def get_bets_by_user_id(id):
     user = User.query.filter_by(id=id).first()
     bets = [bet.to_dict() for bet in user.bets]
     return make_response(jsonify(bets), 200)
@@ -108,7 +109,7 @@ def get_current_bets(id):
     user = User.query.filter_by(id=id).first()
 
     if request.method == 'GET':
-        current_bets = user.bets['current_bets']
+        current_bets = user.bets
         current_bets_dict = [bet.to_dict() for bet in current_bets]
         return make_response(jsonify(current_bets_dict), 200)
     
@@ -164,3 +165,4 @@ def get_bet(id, bet_id):
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
+    

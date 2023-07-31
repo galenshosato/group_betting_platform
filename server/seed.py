@@ -1,6 +1,6 @@
 from app import app
 from extensions import db
-from models import User
+from models import User, Bet
 
 if __name__ == '__main__':
     with app.app_context():
@@ -16,5 +16,9 @@ if __name__ == '__main__':
             User(name='Morgan', email='morgantschlesinger@gmail.com', password='JackieParnassus', money=100000)
         ]
 
+        bet1 = Bet(amount= 100, winnings = 200, user_id = 1)
+        bet2 = Bet(amount = 500, winnings = 300, user_id = 1)
+
         db.session.add_all(users)
+        db.session.add_all([bet1,bet2])
         db.session.commit()
