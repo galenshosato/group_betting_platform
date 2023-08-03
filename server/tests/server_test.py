@@ -106,6 +106,49 @@ class TestAPI(TestCase):
         data = json.loads(response.data)
         self.assertEqual(data[0]['amount'], 100)
         self.assertEqual(data[1]['winnings'], 300)
+    
+    def test_post_bet(self):
+        user = User(id = 1, name = 'user1', weekly_money=100000)
+        db.session.add(user)
+        db.session.commit()
+        new_bet_data = {'amount': 20000, 'bet_type': 'prop', 'odds': 240, 'user_id': 1}
+        response = self.client.post(f'/api/{user.id}/current-weekly-bets', data = json.dumps(new_bet_data), content_type = 'application/json')
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.data)
+        test_user = User.query.filter_by(name='user1').first()
+        self.assertEqual(data['bet_type'], 'prop')
+        self.assertEqual(test_user.weekly_money, 80000)
+    
+    def test_get_current_futures(self):
+        user = User(id=1, name='user1', weekly_money=100000)
+        bet1 = Bet(amount=100, winnings = 200, bet_type = 'futures', user_id = user.id)
+        bet2 = Bet(amount=400, winnings = 700, bet_type = 'futures', user_id = user.id)
+        db.session.add(user)
+        db.session.add_all([bet1, bet2])
+        db.session.commit()
+
+        response = self.client.get(f'/api/{user.id}/current-futures-bets')
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.data)
+        self.assertEqual(data[0]['amount'], 100)
+        self.assertEqual(data[1]['winnings'], 700)
+
+    def test_post_current_futures(self):
+        pass
+
+    def test_get_past_bets(self):
+        pass
+
+    def test_get_bet(self):
+        pass
+
+    def test_patch_bet(self):
+        pass
+
+    def test_delete_bet(self):
+        pass
+        
+
 
 
 if __name__ == '__main__':

@@ -142,7 +142,7 @@ def get_past_bets(id):
     past_bets_dict = [bet.to_dict() for bet in past_bets]
     return make_response(jsonify(past_bets_dict), 200)
 
-# Getting a specific bet, updating hit to True or False, deleting a bet
+# Getting a specific bet, updating "hit" to 'hit'|| 'push' || 'miss', deleting a bet
 @app.route('/api/<int:id>/currentbet/<int:bet_id>', methods =['GET', 'PATCH', 'DELETE'])
 def get_bet(id, bet_id):
     user = User.query.filter_by(id=id).first()
@@ -158,10 +158,16 @@ def get_bet(id, bet_id):
         for field in data:
             setattr(bet, field, data[field])
         db.session.add(bet)
-        if hit_response == True:
+        if hit_response == 'hit':
             user.money += bet.winnings
             db.session.add(user)
-        db.session.commit()
+            db.session.commit()
+        elif hit_response == 'push':
+            user.money += bet.amount
+            db.session.add(user)
+            db.session.commit()
+        else:
+            db.session.commit()
         return make_response(jsonify(bet.to_dict()), 200)
     
     elif request.method =='DELETE':
