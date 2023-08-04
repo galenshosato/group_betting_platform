@@ -134,6 +134,20 @@ def get_futures_bets(id):
     if request.method =='GET':
         futures_bets_to_dict = [futures_bet.to_dict() for futures_bet in futures_bets]
         return make_response(jsonify(futures_bets_to_dict), 200)
+    
+    if request.method == 'POST':
+        new_bet = Bet()
+        data = request.get_json()
+        for field in data:
+            setattr(new_bet, field, data[field])
+        db.session.add(new_bet)
+        user = User.query.filter_by(id=id).first()
+        amount = data.get('amount')
+        user.futures_money = user.futures_money - amount
+        db.session.add(user)
+        db.session.commit()
+        return make_response(jsonify(new_bet.to_dict()), 200)
+
 
 #Get a list of the past bets for a user
 @app.route('/api/<int:id>/past-bets')

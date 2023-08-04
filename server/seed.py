@@ -11,10 +11,10 @@ if __name__ == '__main__':
 
         users = [
             User(name='Dev', email='dev@dev.com', password='123', money=0),
-            User(name='Galen', email='galen.sato@gmail.com', password='galensato', money=100000 ),
-            User(name='Chris', email='chris.lanehart@gmail.com', password='fullLaneHart', money=100000),
-            User(name='Grant', email='grant.markin@gmail.com', password='ChargeAhead23', money=100000),
-            User(name='Morgan', email='morgantschlesinger@gmail.com', password='JackieParnassus', money=100000)
+            User(name='Galen', email='galen.sato@gmail.com', password='galensato', money=100000, futures_money=40000 ),
+            User(name='Chris', email='chris.lanehart@gmail.com', password='fullLaneHart', money=100000, futures_money=40000),
+            User(name='Grant', email='grant.markin@gmail.com', password='ChargeAhead23', money=100000, futures_money=40000),
+            User(name='Morgan', email='morgantschlesinger@gmail.com', password='JackieParnassus', money=100000, futures_money=40000)
         ]
 
         print('Seeding bets...')

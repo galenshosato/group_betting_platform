@@ -134,19 +134,59 @@ class TestAPI(TestCase):
         self.assertEqual(data[1]['winnings'], 700)
 
     def test_post_current_futures(self):
-        pass
-
-    def test_get_past_bets(self):
-        pass
+        user = User(id = 1, name = 'user1', weekly_money=100000, futures_money = 2000)
+        db.session.add(user)
+        db.session.commit()
+        new_bet_data = {'amount': 1000, 'bet_type': 'futures', 'odds': 240, 'user_id': 1}
+        response = self.client.post(f'/api/{user.id}/current-futures-bets', data = json.dumps(new_bet_data), content_type = 'application/json')
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.data)
+        self.assertEqual(user.futures_money, 1000)
+        self.assertEqual(data['odds'], 240)
 
     def test_get_bet(self):
-        pass
+        user = User(id = 1, name='user1')
+        bet1 = Bet(id=1, user_id=1, amount=100, winnings=2000)
+        db.session.add(user)
+        db.session.add(bet1)
+        db.session.commit()
+        response = self.client.get(f'/api/{user.id}/currentbet/{bet1.id}')
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.data)
+        self.assertEqual(data['amount'], 100)
+        self.assertEqual(data['winnings'], 2000)
 
     def test_patch_bet(self):
-        pass
+        user = User(id=1, name='user1', money=2000)
+        bet1 = Bet(id=1, user_id=1, amount=100, winnings=500)
+        bet2 = Bet(id=2, user_id=1, amount=500, winnings=2000)
+        db.session.add(user)
+        db.session.add_all([bet1,bet2])
+        db.session.commit()
+        
+        bet_data = {'hit':'hit'}
+        response = self.client.patch(f'/api/{user.id}/currentbet/{bet1.id}', data=json.dumps(bet_data), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        data=json.loads(response.data)
+        self.assertEqual(user.money, 2500)
+        self.assertEqual(data['hit'], 'hit')
+        
+        bet_data2 = {'hit':'push'}
+        response2 = self.client.patch(f'/api/{user.id}/currentbet/{bet2.id}', data=json.dumps(bet_data2), content_type='application/json')
+        self.assertEqual(response2.status_code, 200)
+        data2 = json.loads(response2.data)
+        self.assertEqual(user.money, 3000)
+        self.assertEqual(data2['hit'], 'push')
 
     def test_delete_bet(self):
-        pass
+        user = User(id=1, name='user1', money=2000)
+        bet = Bet(id=1, user_id=1, amount=100, winnings=200)
+        db.session.add(user)
+        db.session.add(bet)
+        response = self.client.delete(f'/api/{user.id}/currentbet/{bet.id}')
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.data)
+        self.assertEqual(data['Delete'], 'You have successfully deleted this bet!')
         
 
 
