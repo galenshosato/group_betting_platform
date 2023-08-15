@@ -38,7 +38,10 @@ function NavBar({ currentUser, setCurrentUser, week }) {
             ) : (
               <LoginModal id="login" setCurrentUser={setCurrentUser} />
             )}
-            {currentUser.name ? <button id="logout">Logout</button> : null}
+            {currentUser.name === "dev" ? (
+              <button id="addNewUser-btn">Add New User</button>
+            ) : null}
+            {currentUser.name ? <button id="logout-btn">Logout</button> : null}
           </Nav>
         </Container>
       </Navbar>

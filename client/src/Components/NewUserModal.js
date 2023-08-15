@@ -2,11 +2,9 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import ChangePasswordModal from "./ChangePasswordModal";
 
-function LoginModal({ setCurrentUser }) {
-  const [showLogin, setShowLogin] = useState(false);
-  const [showChangePassword, setShowChangePassword] = useState(false);
+function NewUserModal() {
+  const [showNewUser, setShowNewUser] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -17,30 +15,27 @@ function LoginModal({ setCurrentUser }) {
       password: password,
     };
 
-    fetch("/api/login", {
+    fetch("/api/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    })
-      .then((resp) => resp.json())
-      .then((data) => setCurrentUser(data));
-
-    setShowLogin(false);
-  }
-
-  function handleClick() {
-    setShowLogin(false);
-    setShowChangePassword(true);
+    }).then((resp) => {
+      if (resp.ok) {
+        setShowNewUser(false);
+      } else {
+        alert("New User was not created");
+      }
+    });
   }
 
   return (
     <>
-      <button id="login" onClick={() => setShowLogin(true)}>
-        Login
+      <button id="login" onClick={() => setShowNewUser(true)}>
+        Add User
       </button>
-      <Modal centered show={showLogin} onHide={() => setShowLogin(false)}>
+      <Modal centered show={showNewUser} onHide={() => setShowNewUser(false)}>
         <Modal.Body>
           <Form id="login-form">
             <Form.Group controlId="formBasicEmail">
@@ -50,9 +45,8 @@ function LoginModal({ setCurrentUser }) {
             <br></br>
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Enter Password" />
+              <Form.Control placeholder="Enter Password" />
             </Form.Group>
-            <span onClick={handleClick}>Change Password</span>
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -63,16 +57,8 @@ function LoginModal({ setCurrentUser }) {
           </a>
         </Modal.Footer>
       </Modal>
-      {showChangePassword ? (
-        <ChangePasswordModal
-          showChangePassword={showChangePassword}
-          setShowChangePassword={setShowChangePassword}
-          setShowLogin={setShowLogin}
-          showLogin={showLogin}
-        />
-      ) : null}
     </>
   );
 }
 
-export default LoginModal;
+export default NewUserModal;
