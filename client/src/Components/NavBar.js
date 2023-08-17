@@ -4,9 +4,17 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 // import { useNavigate } from "react-router-dom";
 import LoginModal from "./LoginModal";
+import NewUserModal from "./NewUserModal";
 
 function NavBar({ currentUser, setCurrentUser, week }) {
   //   const navigate = useNavigate();
+
+  function handleLogout() {
+    fetch("/api/logout", {
+      method: "POST",
+    });
+    setCurrentUser({});
+  }
 
   return (
     <>
@@ -38,10 +46,12 @@ function NavBar({ currentUser, setCurrentUser, week }) {
             ) : (
               <LoginModal id="login" setCurrentUser={setCurrentUser} />
             )}
-            {currentUser.name === "dev" ? (
-              <button id="addNewUser-btn">Add New User</button>
+            {currentUser.name === "dev" ? <NewUserModal /> : null}
+            {currentUser.name ? (
+              <button id="logout-btn" onClick={handleLogout}>
+                Logout
+              </button>
             ) : null}
-            {currentUser.name ? <button id="logout-btn">Logout</button> : null}
           </Nav>
         </Container>
       </Navbar>
