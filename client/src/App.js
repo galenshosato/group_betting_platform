@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Header from "./Components/Header";
-import NavBar from "./Components/NavBar";
+import NavBar from "./Components/NavBarComponents/NavBar";
+import HomePage from "./Components/HomePageComponents/HomePage";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -23,6 +24,9 @@ function App() {
         setCurrentUser={setCurrentUser}
         week={week}
       />
+      <br></br>
+      <h1>Week {week}</h1>
+      <HomePage week={week} />
     </div>
   );
 }
