@@ -1,6 +1,6 @@
 import Card from "react-bootstrap/Card";
 
-function RankingCard({ user, week }) {
+function RankingCard({ user, week, rank }) {
   const { name, money } = user;
   let total = +week * 100000;
   let difference = money - total;
@@ -13,6 +13,7 @@ function RankingCard({ user, week }) {
     <>
       <Card>
         <Card.Body>
+          <h1>{rank}</h1>
           <h1>{name}</h1>
           <h2>{money}</h2>
           <h2>{difference}</h2>

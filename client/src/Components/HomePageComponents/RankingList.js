@@ -21,8 +21,10 @@ function RankingList({ week }) {
 
   return (
     <>
-      {sortedUsers.map((user) => {
-        return <RankingCard key={user.id} user={user} week={week} />;
+      {sortedUsers.map((user, index) => {
+        return (
+          <RankingCard key={user.id} user={user} week={week} rank={index + 1} />
+        );
       })}
     </>
   );

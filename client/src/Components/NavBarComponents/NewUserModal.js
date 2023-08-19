@@ -16,7 +16,7 @@ function NewUserModal() {
       email: email,
       password: password,
       futures_money: 40000,
-      weekly_money: 100000,
+      money: 100000,
     };
 
     fetch("/api/users", {
