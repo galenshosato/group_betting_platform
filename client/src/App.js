@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "./Components/Header";
 import NavBar from "./Components/NavBarComponents/NavBar";
 import HomePage from "./Components/HomePageComponents/HomePage";
+import UserPage from "./Components/UserPageComponents/UserPage";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -25,8 +26,9 @@ function App() {
         week={week}
       />
       <br></br>
-      <h1>Week {week}</h1>
-      <HomePage week={week} />
+      {/* <h1>Week {week}</h1>
+      <HomePage week={week} /> */}
+      <UserPage week={week} currentUser={currentUser} />
     </div>
   );
 }
