@@ -15,10 +15,17 @@ function BetList({ week, id }) {
 
   return (
     <>
-      {/* {betList.map((bet) => {
+      {betList.map((bet) => {
         return <BetCard key={bet.id} bet={bet} week={week} />;
-      })} */}
-      {showAddBet ? <AddNewBetForm /> : null}
+      })}
+      {showAddBet ? (
+        <AddNewBetForm
+          betList={betList}
+          setBetList={setBetList}
+          week={week}
+          id={id}
+        />
+      ) : null}
       <Button onClick={() => setShowAddBet(true)}>Make New Bet</Button>
     </>
   );
