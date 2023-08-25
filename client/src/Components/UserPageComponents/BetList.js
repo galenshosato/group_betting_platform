@@ -3,7 +3,14 @@ import BetCard from "./BetCard";
 import Button from "react-bootstrap/Button";
 import AddNewBetForm from "./AddNewBetForm";
 
-function BetList({ week, id }) {
+function BetList({
+  week,
+  id,
+  weekly_money,
+  futures_money,
+  setUserWeeklyMoney,
+  setUserFuturesMoney,
+}) {
   const [betList, setBetList] = useState([]);
   const [showAddBet, setShowAddBet] = useState(false);
 
@@ -16,7 +23,15 @@ function BetList({ week, id }) {
   return (
     <>
       {betList.map((bet) => {
-        return <BetCard key={bet.id} bet={bet} week={week} />;
+        return (
+          <BetCard
+            key={bet.id}
+            bet={bet}
+            week={week}
+            betList={betList}
+            setBetList={setBetList}
+          />
+        );
       })}
       {showAddBet ? (
         <AddNewBetForm
@@ -24,6 +39,11 @@ function BetList({ week, id }) {
           setBetList={setBetList}
           week={week}
           id={id}
+          weekly_money={weekly_money}
+          futures_money={futures_money}
+          setUserWeeklyMoney={setUserWeeklyMoney}
+          setUserFuturesMoney={setUserFuturesMoney}
+          setShowAddBet={setShowAddBet}
         />
       ) : null}
       <Button onClick={() => setShowAddBet(true)}>Make New Bet</Button>

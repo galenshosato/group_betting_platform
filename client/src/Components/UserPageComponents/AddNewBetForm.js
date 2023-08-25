@@ -3,7 +3,16 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
 
-function AddNewBetForm({ betList, setBetList, week, id }) {
+function AddNewBetForm({
+  setBetList,
+  week,
+  id,
+  weekly_money,
+  futures_money,
+  setUserWeeklyMoney,
+  setUserFuturesMoney,
+  setShowAddBet,
+}) {
   const [selectedRadioValue, setSelectedRadioValue] = useState("Current");
   const [newBet, setNewBet] = useState(null);
   const [newBetOdds, setNewBetOdds] = useState(0);
@@ -51,6 +60,9 @@ function AddNewBetForm({ betList, setBetList, week, id }) {
         winnings: newWinnings,
       };
 
+      let newWeeklyMoney = weekly_money - +newWager;
+      setUserWeeklyMoney(newWeeklyMoney);
+
       fetch(`/api/${id}/current-weekly-bets`, {
         method: "POST",
         headers: {
@@ -59,9 +71,10 @@ function AddNewBetForm({ betList, setBetList, week, id }) {
         body: JSON.stringify(currentData),
       })
         .then((resp) => resp.json())
-        .then((returnData) =>
-          setBetList((prevBetList) => [...prevBetList, returnData])
-        );
+        .then((returnData) => {
+          setBetList((prevBetList) => [...prevBetList, returnData]);
+          setShowAddBet(false);
+        });
     } else {
       const futureData = {
         amount: +newWager,
@@ -73,6 +86,9 @@ function AddNewBetForm({ betList, setBetList, week, id }) {
         winnings: newWinnings,
       };
 
+      let newFuturesMoney = futures_money - +newWager;
+      setUserFuturesMoney(newFuturesMoney);
+
       fetch(`/api/${id}/current-futures-bets`, {
         method: "POST",
         headers: {
@@ -81,9 +97,10 @@ function AddNewBetForm({ betList, setBetList, week, id }) {
         body: JSON.stringify(futureData),
       })
         .then((resp) => resp.json())
-        .then((returnData) =>
-          setBetList((prevBetList) => [...prevBetList, returnData])
-        );
+        .then((returnData) => {
+          setBetList((prevBetList) => [...prevBetList, returnData]);
+          setShowAddBet(false);
+        });
     }
   }
 

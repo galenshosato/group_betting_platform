@@ -1,5 +1,5 @@
-function UserDashboard({ currentUser }) {
-  const { name, money, weekly_money, futures_money } = currentUser;
+function UserDashboard({ currentUser, weekly_money, futures_money }) {
+  const { name, money } = currentUser;
 
   return (
     <>
