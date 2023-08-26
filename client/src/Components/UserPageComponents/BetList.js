@@ -10,6 +10,8 @@ function BetList({
   futures_money,
   setUserWeeklyMoney,
   setUserFuturesMoney,
+  futuresList,
+  setFuturesList,
 }) {
   const [betList, setBetList] = useState([]);
   const [showAddBet, setShowAddBet] = useState(false);
@@ -22,6 +24,8 @@ function BetList({
 
   return (
     <>
+      <h1>Weekly Bets</h1>
+      <br />
       {betList.map((bet) => {
         return (
           <BetCard
@@ -30,6 +34,10 @@ function BetList({
             week={week}
             betList={betList}
             setBetList={setBetList}
+            weekly_money={weekly_money}
+            futures_money={futures_money}
+            setUserWeeklyMoney={setUserWeeklyMoney}
+            setUserFuturesMoney={setUserFuturesMoney}
           />
         );
       })}
@@ -44,6 +52,8 @@ function BetList({
           setUserWeeklyMoney={setUserWeeklyMoney}
           setUserFuturesMoney={setUserFuturesMoney}
           setShowAddBet={setShowAddBet}
+          futuresList={futuresList}
+          setFuturesList={setFuturesList}
         />
       ) : null}
       <Button onClick={() => setShowAddBet(true)}>Make New Bet</Button>

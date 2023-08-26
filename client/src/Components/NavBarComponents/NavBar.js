@@ -14,6 +14,7 @@ function NavBar({ currentUser, setCurrentUser, week }) {
       method: "POST",
     });
     setCurrentUser({});
+    localStorage.clear();
   }
 
   return (

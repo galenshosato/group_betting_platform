@@ -209,6 +209,12 @@ def get_bet(id, bet_id):
         return make_response(jsonify(bet.to_dict()), 200)
 
     elif request.method == "DELETE":
+        data = request.get_json()
+        if data.get("bet_type") == "weekly":
+            user.weekly_money += bet.amount
+        else:
+            user.futures_money += bet.amount
+        db.session.add(user)
         db.session.delete(bet)
         db.session.commit()
         return make_response(

@@ -12,6 +12,8 @@ function AddNewBetForm({
   setUserWeeklyMoney,
   setUserFuturesMoney,
   setShowAddBet,
+  futuresList,
+  setFuturesList,
 }) {
   const [selectedRadioValue, setSelectedRadioValue] = useState("Current");
   const [newBet, setNewBet] = useState(null);
@@ -22,9 +24,9 @@ function AddNewBetForm({
   useEffect(() => {
     if (newBetOdds !== 0 && newWager > 0) {
       if (+newBetOdds > 0) {
-        setNewWinnings(+newWager * (newBetOdds / 100));
+        setNewWinnings(Math.round(+newWager * (newBetOdds / 100)));
       } else {
-        setNewWinnings((+newWager * 100) / -newBetOdds);
+        setNewWinnings(Math.round((+newWager * 100) / -newBetOdds));
       }
     } else {
       setNewWinnings(0);
@@ -44,7 +46,10 @@ function AddNewBetForm({
   }
 
   function handleWagerChange(event) {
-    setNewWager(event.target.value);
+    const rawValue = event.target.value;
+    const numericValue = parseInt(rawValue.replace(/,/g, ""), 10);
+
+    setNewWager(isNaN(numericValue) ? 0 : numericValue);
   }
 
   function handleBetSubmit(event) {
@@ -98,7 +103,7 @@ function AddNewBetForm({
       })
         .then((resp) => resp.json())
         .then((returnData) => {
-          setBetList((prevBetList) => [...prevBetList, returnData]);
+          setFuturesList((prevBetList) => [...prevBetList, returnData]);
           setShowAddBet(false);
         });
     }
@@ -108,6 +113,7 @@ function AddNewBetForm({
     <>
       <Card>
         <Card.Body>
+          <Button onClick={() => setShowAddBet(false)}>X</Button>
           <Form>
             <Form.Group>
               <Form.Check
@@ -152,7 +158,7 @@ function AddNewBetForm({
         </Card.Body>
       </Card>
       <Button onClick={handleBetSubmit}>
-        <span>TO WIN ${newWinnings}</span>||Submit Bet
+        <span>TO WIN ${newWinnings.toLocaleString()}</span>||Submit Bet
       </Button>
     </>
   );
