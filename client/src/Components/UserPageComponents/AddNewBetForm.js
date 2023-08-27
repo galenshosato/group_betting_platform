@@ -2,6 +2,7 @@ import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
+import ParlayForm from "./ParlayForm";
 
 function AddNewBetForm({
   setBetList,
@@ -12,7 +13,6 @@ function AddNewBetForm({
   setUserWeeklyMoney,
   setUserFuturesMoney,
   setShowAddBet,
-  futuresList,
   setFuturesList,
 }) {
   const [selectedRadioValue, setSelectedRadioValue] = useState("Current");
@@ -20,6 +20,8 @@ function AddNewBetForm({
   const [newBetOdds, setNewBetOdds] = useState(0);
   const [newWager, setNewWager] = useState(0);
   const [newWinnings, setNewWinnings] = useState(0);
+  const [showParlayForm, setShowParlayForm] = useState(false);
+  const [parlayArr, setParlayArr] = useState([]);
 
   useEffect(() => {
     if (newBetOdds !== 0 && newWager > 0) {
@@ -109,6 +111,16 @@ function AddNewBetForm({
     }
   }
 
+  function handleParlay() {
+    const betData = {
+      name: newBet,
+      odds: +newBetOdds,
+    };
+    setParlayArr((prevArr) => [...prevArr, betData]);
+    console.log(parlayArr);
+    setShowParlayForm(true);
+  }
+
   return (
     <>
       <Card>
@@ -154,9 +166,17 @@ function AddNewBetForm({
               />
             </Form.Group>
           </Form>
-          <Button>Parlay</Button>
+          <Button onClick={handleParlay}>Parlay</Button>
         </Card.Body>
       </Card>
+      {showParlayForm ? (
+        <ParlayForm
+          parlayArr={parlayArr}
+          setParlayArr={setParlayArr}
+          newBetOdds={newBetOdds}
+          setNewBetOdds={setNewBetOdds}
+        />
+      ) : null}
       <Button onClick={handleBetSubmit}>
         <span>TO WIN ${newWinnings.toLocaleString()}</span>||Submit Bet
       </Button>
