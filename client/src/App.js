@@ -3,6 +3,7 @@ import Header from "./Components/Header";
 import NavBar from "./Components/NavBarComponents/NavBar";
 import HomePage from "./Components/HomePageComponents/HomePage";
 import UserPage from "./Components/UserPageComponents/UserPage";
+import DevBetList from "./Components/DevTools/DevBetList";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -28,7 +29,8 @@ function App() {
       <br></br>
       {/* <h1>Week {week}</h1>
       <HomePage week={week} /> */}
-      <UserPage week={week} currentUser={currentUser} />
+      {/* <UserPage week={week} currentUser={currentUser} /> */}
+      <DevBetList week={week} />
     </div>
   );
 }

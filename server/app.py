@@ -117,6 +117,16 @@ def get_users():
         return make_response(jsonify(new_user.to_dict()), 200)
 
 
+# Get all current bets
+@app.route("/api/dev/<int:week>/get-current-bets")
+def get_all_current_bets(week):
+    bets = Bet.query.filter(
+        Bet.week == week, Bet.created_at == Bet.updated_at, Bet.bet_type != "futures"
+    ).all()
+    bets_to_dict = [bet.to_dict() for bet in bets]
+    return make_response(jsonify(bets_to_dict), 200)
+
+
 # Get all bets that a user has placed
 @app.route("/api/<int:id>/bets")
 def get_bets_by_user_id(id):
