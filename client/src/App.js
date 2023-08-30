@@ -30,7 +30,7 @@ function App() {
       {/* <h1>Week {week}</h1>
       <HomePage week={week} /> */}
       {/* <UserPage week={week} currentUser={currentUser} /> */}
-      <DevBetList week={week} />
+      <DevBetList week={week} setWeek={setWeek} currentUser={currentUser} />
     </div>
   );
 }

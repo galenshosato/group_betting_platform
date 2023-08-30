@@ -8,6 +8,7 @@ from flask import (
 )
 from extensions import *
 from models import User, Bet
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -117,7 +118,7 @@ def get_users():
         return make_response(jsonify(new_user.to_dict()), 200)
 
 
-# Get all current bets
+# Get all current bets for dev
 @app.route("/api/dev/<int:week>/get-current-bets")
 def get_all_current_bets(week):
     bets = Bet.query.filter(
@@ -205,6 +206,7 @@ def get_bet(id, bet_id):
         hit_response = data.get("hit")
         for field in data:
             setattr(bet, field, data[field])
+        bet.updated_at = datetime.utcnow().replace(microsecond=0)
         db.session.add(bet)
         if hit_response == "hit":
             user.money += bet.winnings

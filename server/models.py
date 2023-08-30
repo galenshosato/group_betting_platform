@@ -36,6 +36,7 @@ class User(db.Model):
                     current_bet.to_dict()
                     for current_bet in self.bets
                     if current_bet.bet_type != "futures"
+                    and current_bet.updated_at == current_bet.created_at
                 ],
                 "past_bets": [
                     past_bet.to_dict()
