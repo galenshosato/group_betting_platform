@@ -12,6 +12,7 @@ class User(db.Model):
     money = db.Column(db.Integer)
     weekly_money = db.Column(db.Integer)
     futures_money = db.Column(db.Integer)
+    week = db.Column(db.Integer)
     created_at = db.Column(
         db.DateTime, default=datetime.utcnow().replace(microsecond=0)
     )
@@ -31,6 +32,7 @@ class User(db.Model):
             "money": self.money,
             "weekly_money": self.weekly_money,
             "futures_money": self.futures_money,
+            "week": self.week,
             "bets": {
                 "current_bets": [
                     current_bet.to_dict()
@@ -72,9 +74,11 @@ class Bet(db.Model):
     )
 
     def to_dict(self):
+        user_name = self.user.name if self.user else None
         return {
             "id": self.id,
             "user_id": self.user_id,
+            "user_name": user_name,
             "bet_name": self.bet_name,
             "bet_type": self.bet_type,
             "amount": self.amount,

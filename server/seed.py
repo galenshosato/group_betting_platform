@@ -17,6 +17,7 @@ if __name__ == "__main__":
                 money=100000,
                 weekly_money=100000,
                 futures_money=40000,
+                week=1,
             ),
             User(
                 name="Galen",

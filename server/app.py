@@ -93,15 +93,18 @@ def change_password():
 # Getting users, updating the weekly money, adding a new user by the dev
 @app.route("/api/users", methods=["GET", "PATCH", "POST"])
 def get_users():
-    users = User.query.all()
+    users = User.query.filter(User.name != "dev").all()
+    dev = User.query.filter(User.name == "dev").first()
     if request.method == "GET":
         users_dict = [user.to_dict() for user in users]
         return make_response(jsonify(users_dict), 200)
 
     elif request.method == "PATCH":
+        dev.week += 1
         for user in users:
             user.weekly_money = 100000
         db.session.add_all(users)
+        db.session.add(dev)
         db.session.commit()
         users_to_dict = [user.to_dict() for user in users]
         return make_response(jsonify(users_to_dict), 200)
@@ -118,12 +121,37 @@ def get_users():
         return make_response(jsonify(new_user.to_dict()), 200)
 
 
-# Get all current bets for dev
-@app.route("/api/dev/<int:week>/get-current-bets")
+# Get a single user
+@app.route("/api/user/<int:id>")
+def get_single_user(id):
+    user = User.query.filter(User.id == id).first()
+    return make_response(jsonify(user.to_dict()), 200)
+
+
+# Get all current bets for the week
+@app.route("/api/<int:week>/get-current-bets")
 def get_all_current_bets(week):
     bets = Bet.query.filter(
         Bet.week == week, Bet.created_at == Bet.updated_at, Bet.bet_type != "futures"
     ).all()
+    bets_to_dict = [bet.to_dict() for bet in bets]
+    return make_response(jsonify(bets_to_dict), 200)
+
+
+# Get all past bets for a current week
+@app.route("/api/<int:week>/get-past-bets")
+def get_all_past_bets_for_week(week):
+    bets = Bet.query.filter(
+        Bet.week == week, Bet.created_at != Bet.updated_at, Bet.bet_type != "futures"
+    ).all()
+    bets_to_dict = [bet.to_dict() for bet in bets]
+    return make_response(jsonify(bets_to_dict), 200)
+
+
+# Get all futures bets that have been placed
+@app.route("/api/get-future-bets")
+def get_all_future_bets():
+    bets = Bet.query.filter(Bet.bet_type == "futures")
     bets_to_dict = [bet.to_dict() for bet in bets]
     return make_response(jsonify(bets_to_dict), 200)
 

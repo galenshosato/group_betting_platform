@@ -7,7 +7,7 @@ function DevBetList({ week, setWeek, currentUser, showAddBet, setShowAddBet }) {
   const [weeklyBetList, setWeeklyBetList] = useState([]);
 
   useEffect(() => {
-    fetch(`/api/dev/${week}/get-current-bets`)
+    fetch(`/api/${week}/get-current-bets`)
       .then((resp) => resp.json())
       .then((data) => setWeeklyBetList(data));
   }, [week]);

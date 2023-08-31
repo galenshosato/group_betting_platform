@@ -23,18 +23,17 @@ function NavBar({ currentUser, setCurrentUser, week }) {
         <Container>
           <Nav className="me-auto">
             <Nav.Link id="home">Home</Nav.Link>
-            {currentUser.name === "dev" ? (
+            {currentUser.name !== null && currentUser.name === "dev" ? (
               <Nav.Link id="allBets">Week {week} Bets (Dev)</Nav.Link>
             ) : (
-              <Nav.Link id="userBets">Week {week} Bets</Nav.Link>
-            )}
-            {currentUser.name && currentUser.name !== "dev" ? (
-              <Nav.Link id="userPastBets">
-                {currentUser.name}'s Past Bets
+              <Nav.Link id="userBets">
+                {currentUser.name
+                  ? `${currentUser.name}'s Bets`
+                  : "Player Bets"}
               </Nav.Link>
-            ) : (
-              <Nav.Link id="pastBets">Past Bets</Nav.Link>
             )}
+            <Nav.Link id="allUserBets">All Player Bets</Nav.Link>
+            <Nav.Link id="pastBets">Past Bets</Nav.Link>
           </Nav>
           <Nav>
             {currentUser.name ? (
