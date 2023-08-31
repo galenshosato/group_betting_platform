@@ -8,6 +8,7 @@ import DevBetList from "./Components/DevTools/DevBetList";
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [week, setWeek] = useState(1);
+  const [showAddBet, setShowAddBet] = useState(false);
 
   useEffect(() => {
     fetch("/api/check_session").then((resp) => {
@@ -29,8 +30,14 @@ function App() {
       <br></br>
       {/* <h1>Week {week}</h1>
       <HomePage week={week} /> */}
-      {/* <UserPage week={week} currentUser={currentUser} /> */}
-      <DevBetList week={week} setWeek={setWeek} currentUser={currentUser} />
+      {/* <UserPage week={week} currentUser={currentUser} setShowAddBet={setShowAddBet} showAddBet={showAddBet} /> */}
+      <DevBetList
+        week={week}
+        setWeek={setWeek}
+        currentUser={currentUser}
+        showAddBet={showAddBet}
+        setShowAddBet={setShowAddBet}
+      />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
 import ParlayForm from "./ParlayForm";
+import DevDropdown from "../DevTools/DevDropdown";
 
 function AddNewBetForm({
   setBetList,
@@ -14,6 +15,8 @@ function AddNewBetForm({
   setUserFuturesMoney,
   setShowAddBet,
   setFuturesList,
+  setWeeklyBetList,
+  currentUser,
 }) {
   const [selectedRadioValue, setSelectedRadioValue] = useState("Current");
   const [newBet, setNewBet] = useState(null);
@@ -22,6 +25,7 @@ function AddNewBetForm({
   const [newWinnings, setNewWinnings] = useState(0);
   const [showParlayForm, setShowParlayForm] = useState(false);
   const [parlayArr, setParlayArr] = useState([]);
+  const [devUserId, setDevUserId] = useState(null);
 
   useEffect(() => {
     if (newBetOdds !== 0 && newWager > 0) {
@@ -111,13 +115,60 @@ function AddNewBetForm({
     }
   }
 
+  function handleDevBetSubmit(event) {
+    event.preventDefault();
+
+    if (selectedRadioValue === "Current") {
+      const currentData = {
+        amount: +newWager,
+        bet_name: newBet,
+        bet_type: "weekly",
+        odds: newBetOdds,
+        user_id: devUserId,
+        week: week,
+        winnings: newWinnings,
+      };
+
+      fetch(`/api/${devUserId}/current-weekly-bets`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(currentData),
+      })
+        .then((resp) => resp.json())
+        .then((returnData) => {
+          setWeeklyBetList((prevBetList) => [...prevBetList, returnData]);
+          setShowAddBet(false);
+        });
+    } else {
+      const futureData = {
+        amount: +newWager,
+        bet_name: newBet,
+        bet_type: "futures",
+        odds: newBetOdds,
+        user_id: devUserId,
+        week: week,
+        winnings: newWinnings,
+      };
+
+      fetch(`/api/${devUserId}/current-futures-bets`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(futureData),
+      }).then((resp) => resp.json());
+      setShowAddBet(false);
+    }
+  }
+
   function handleParlay() {
     const betData = {
       name: newBet,
       odds: +newBetOdds,
     };
     setParlayArr((prevArr) => [...prevArr, betData]);
-    console.log(parlayArr);
     setShowParlayForm(true);
   }
 
@@ -126,6 +177,9 @@ function AddNewBetForm({
       <Card>
         <Card.Body>
           <Button onClick={() => setShowAddBet(false)}>X</Button>
+          {currentUser.name === "dev" ? (
+            <DevDropdown setDevUserId={setDevUserId} />
+          ) : null}
           <Form>
             <Form.Group>
               <Form.Check
@@ -175,9 +229,14 @@ function AddNewBetForm({
           setParlayArr={setParlayArr}
           newBetOdds={newBetOdds}
           setNewBetOdds={setNewBetOdds}
+          setNewBet={setNewBet}
         />
       ) : null}
-      <Button onClick={handleBetSubmit}>
+      <Button
+        onClick={
+          currentUser.name === "dev" ? handleDevBetSubmit : handleBetSubmit
+        }
+      >
         <span>TO WIN ${newWinnings.toLocaleString()}</span>||Submit Bet
       </Button>
     </>

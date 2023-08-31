@@ -12,9 +12,10 @@ function BetList({
   setUserFuturesMoney,
   futuresList,
   setFuturesList,
+  showAddBet,
+  setShowAddBet,
 }) {
   const [betList, setBetList] = useState([]);
-  const [showAddBet, setShowAddBet] = useState(false);
 
   useEffect(() => {
     fetch(`/api/${id}/current-weekly-bets`)

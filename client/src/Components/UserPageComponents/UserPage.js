@@ -3,7 +3,7 @@ import BetList from "./BetList";
 import UserDashboard from "./UserDashboard";
 import FutureBetList from "./FutureBetList";
 
-function UserPage({ currentUser, week }) {
+function UserPage({ currentUser, week, setShowAddBet, showAddBet }) {
   const [userWeeklyMoney, setUserWeeklyMoney] = useState(
     parseFloat(localStorage.getItem("userWeeklyMoney")) ||
       currentUser.weekly_money ||
@@ -60,6 +60,8 @@ function UserPage({ currentUser, week }) {
         setUserFuturesMoney={setUserFuturesMoney}
         futuresList={futuresList}
         setFuturesList={setFuturesList}
+        showAddBet={showAddBet}
+        setShowAddBet={setShowAddBet}
       />
       <FutureBetList
         id={currentUser.id}

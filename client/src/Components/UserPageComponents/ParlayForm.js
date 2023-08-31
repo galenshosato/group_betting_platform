@@ -3,7 +3,13 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 
-function ParlayForm({ parlayArr, newBetOdds, setParlayArr, setNewBetOdds }) {
+function ParlayForm({
+  parlayArr,
+  newBetOdds,
+  setParlayArr,
+  setNewBetOdds,
+  setNewBet,
+}) {
   const [parlayName, setParlayName] = useState("");
   const [parlayOdds, setParlayOdds] = useState("");
 
@@ -47,6 +53,8 @@ function ParlayForm({ parlayArr, newBetOdds, setParlayArr, setNewBetOdds }) {
     }
     let pOdds = decimalToAmericanOdds(decimalOdds);
     setNewBetOdds(pOdds);
+
+    setNewBet((prev) => prev + " | " + parlayName);
 
     const betData = {
       name: parlayName,

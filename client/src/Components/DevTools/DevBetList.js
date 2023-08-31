@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import BetCard from "../UserPageComponents/BetCard";
+import AddNewBetForm from "../UserPageComponents/AddNewBetForm";
 
-function DevBetList({ week, setWeek, currentUser }) {
+function DevBetList({ week, setWeek, currentUser, showAddBet, setShowAddBet }) {
   const [weeklyBetList, setWeeklyBetList] = useState([]);
 
   useEffect(() => {
@@ -34,6 +35,15 @@ function DevBetList({ week, setWeek, currentUser }) {
           return <BetCard key={bet.id} bet={bet} currentUser={currentUser} />;
         })}
       </div>
+      {showAddBet ? (
+        <AddNewBetForm
+          setWeeklyBetList={setWeeklyBetList}
+          week={week}
+          setShowAddBet={setShowAddBet}
+          currentUser={currentUser}
+        />
+      ) : null}
+      <Button onClick={() => setShowAddBet(true)}>Make New Bet</Button>
     </>
   );
 }
