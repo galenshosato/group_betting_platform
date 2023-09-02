@@ -7,6 +7,8 @@ import DevBetList from "./Components/DevTools/DevBetList";
 import BetHistory from "./Components/BetHistory";
 import AllBetsPage from "./Components/AllBetsPage";
 
+import { Route, Routes } from "react-router-dom";
+
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [week, setWeek] = useState(null);
@@ -53,18 +55,44 @@ function App() {
         week={week}
       />
       <br></br>
-      {/* <h1>Week {week}</h1>
-      <HomePage week={week} /> */}
-      {/* <UserPage week={week} currentUser={currentUser} setShowAddBet={setShowAddBet} showAddBet={showAddBet} /> */}
-      {/* <DevBetList
-        week={week}
-        setWeek={setWeek}
-        currentUser={currentUser}
-        showAddBet={showAddBet}
-        setShowAddBet={setShowAddBet}
-      /> */}
-      {/* <AllBetsPage week={week} groupAndSort={groupAndSort} /> */}
-      <BetHistory week={week} groupAndSort={groupAndSort} />
+      <h1>Week {week}</h1>
+      <Routes>
+        <Route element={<HomePage week={week} />} path="/" />
+        {currentUser.name === "dev" ? (
+          <Route
+            element={
+              <DevBetList
+                week={week}
+                setWeek={setWeek}
+                currentUser={currentUser}
+                showAddBet={showAddBet}
+                setShowAddBet={setShowAddBet}
+              />
+            }
+            path="/dev/betlist"
+          />
+        ) : (
+          <Route
+            element={
+              <UserPage
+                week={week}
+                currentUser={currentUser}
+                setShowAddBet={setShowAddBet}
+                showAddBet={showAddBet}
+              />
+            }
+            path={`/${currentUser.name}/weekly-bets`}
+          />
+        )}
+        <Route
+          element={<AllBetsPage week={week} groupAndSort={groupAndSort} />}
+          path="/all-current-bets"
+        />
+        <Route
+          element={<BetHistory week={week} groupAndSort={groupAndSort} />}
+          path="/past-bets"
+        />
+      </Routes>
     </div>
   );
 }

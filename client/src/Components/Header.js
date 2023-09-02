@@ -1,11 +1,9 @@
-
-
 function Header() {
-    return (
-        <>
-        <h1>Gambling Header</h1>
-        </>
-    )
+  return (
+    <>
+      <h1>Football Fortune Seekers</h1>
+    </>
+  );
 }
 
-export default Header
+export default Header;

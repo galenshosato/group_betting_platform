@@ -8,7 +8,7 @@ function BetHistoryDropdown({ week, dropDownArray, setPastBetList }) {
   function handlePastBetOption(value) {
     setPastSelectedOption(value);
 
-    fetch(`/api/${value.split(" ")[1]}/ get-past-bets`)
+    fetch(`/api/${value.split(" ")[1]}/get-past-bets`)
       .then((resp) => resp.json())
       .then((data) => setPastBetList(data));
   }
