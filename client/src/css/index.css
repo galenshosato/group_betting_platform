@@ -1,0 +1,10 @@
+body {
+  background-color: black;
+}
+
+.custom-btn {
+  background-color: goldenrod;
+  color: white;
+
+  border-color: goldenrod;
+}

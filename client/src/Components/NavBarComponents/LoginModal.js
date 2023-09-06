@@ -37,9 +37,13 @@ function LoginModal({ setCurrentUser }) {
 
   return (
     <>
-      <button id="login" onClick={() => setShowLogin(true)}>
+      <Button
+        className="custom-btn"
+        id="login"
+        onClick={() => setShowLogin(true)}
+      >
         Login
-      </button>
+      </Button>
       <Modal centered show={showLogin} onHide={() => setShowLogin(false)}>
         <Modal.Body>
           <Form id="login-form">

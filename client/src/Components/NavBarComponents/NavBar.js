@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import LoginModal from "./LoginModal";
 import NewUserModal from "./NewUserModal";
 import Button from "react-bootstrap/Button";
+import "../../css/navbar.css";
 
 function NavBar({ currentUser, setCurrentUser, week }) {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function NavBar({ currentUser, setCurrentUser, week }) {
 
   return (
     <>
-      <Navbar>
+      <Navbar bg="dark" variant="dark">
         <Container>
           <Nav className="me-auto">
             <Nav.Link id="home" href="/">

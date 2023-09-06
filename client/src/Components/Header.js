@@ -1,7 +1,12 @@
+import "../css/header.css";
+
 function Header() {
   return (
     <>
-      <h1>Football Fortune Seekers</h1>
+      <div className="wrapper">
+        <div className="fg">Football Fortune Seekers</div>
+        <div className="bg">Football Fortune Seekers</div>
+      </div>
     </>
   );
 }
