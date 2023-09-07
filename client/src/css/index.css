@@ -20,3 +20,9 @@ body {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
+#allBetsWeek {
+  color: goldenrod;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 3rem;
+}

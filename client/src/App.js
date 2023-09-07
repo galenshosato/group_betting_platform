@@ -6,6 +6,7 @@ import UserPage from "./Components/UserPageComponents/UserPage";
 import DevBetList from "./Components/DevTools/DevBetList";
 import BetHistory from "./Components/BetHistory";
 import AllBetsPage from "./Components/AllBetsPage";
+import Footer from "./Components/Footer";
 
 import { Route, Routes } from "react-router-dom";
 
@@ -55,7 +56,6 @@ function App() {
         week={week}
       />
       <br></br>
-      <h1 id="weekNumber">Week {week}</h1>
       <Routes>
         <Route element={<HomePage week={week} />} path="/" />
         {currentUser.name === "dev" ? (
@@ -93,6 +93,7 @@ function App() {
           path="/past-bets"
         />
       </Routes>
+      <Footer />
     </div>
   );
 }

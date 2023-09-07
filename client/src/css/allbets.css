@@ -1,0 +1,45 @@
+.names {
+  color: goldenrod;
+  padding-bottom: 0.5rem;
+}
+
+.card-container {
+}
+
+.allCardBets {
+  width: 500px;
+  max-height: 100px;
+}
+
+.text-span {
+  display: flex;
+  align-items: center;
+  font-weight: 200;
+  font-style: italic;
+  justify-content: space-evenly;
+  font-size: x-small;
+}
+
+#winnings-span {
+  margin-right: 15px;
+}
+
+.bet-and-odds {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.bet-and-odds h2 {
+  font-size: 1.5rem;
+}
+
+.wagered-and-won {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+h3 {
+  font-size: large;
+}

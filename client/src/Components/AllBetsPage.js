@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ReducedBetCard from "./ReducedBetCard";
 import Container from "react-bootstrap/esm/Container";
 import Button from "react-bootstrap/esm/Button";
+import "../css/allbets.css";
 
 function AllBetsPage({ week, groupAndSort }) {
   const [allCurrentUsersBets, setAllCurrentUsersBets] = useState([]);
@@ -26,30 +27,35 @@ function AllBetsPage({ week, groupAndSort }) {
   return (
     <>
       <Container>
-        <h1>Week {week}</h1>
+        <h1 id="allBetsWeek">Week {week}</h1>
         <br />
-        {groupedUserBets.map(([userName, bets]) => (
-          <div key={userName}>
-            <h2>{userName}</h2>
-            {bets.map((bet) => {
-              return <ReducedBetCard key={bet.id} bet={bet} />;
-            })}
-            <br />
-          </div>
-        ))}
+        <div>
+          {groupedUserBets.map(([userName, bets]) => (
+            <div key={userName}>
+              <h2 className="names">{userName}</h2>
+              {bets.map((bet) => {
+                return <ReducedBetCard key={bet.id} bet={bet} />;
+              })}
+              <br />
+            </div>
+          ))}
+        </div>
       </Container>
       <br />
-      <Button
-        className="custom-btn"
-        onClick={() => setShowFutures((prevState) => !prevState)}
-      >
-        Futures Bets
-      </Button>
+      <Container>
+        <Button
+          className="custom-btn"
+          onClick={() => setShowFutures((prevState) => !prevState)}
+        >
+          Futures Bets
+        </Button>
+      </Container>
+      <br />
       {showFutures ? (
         <Container>
           {groupedFutureBets.map(([userName, bets]) => (
             <div key={userName}>
-              <h2>{userName}</h2>
+              <h2 className="names">{userName}</h2>
               {bets.map((bet) => {
                 return <ReducedBetCard key={bet.id} bet={bet} />;
               })}
