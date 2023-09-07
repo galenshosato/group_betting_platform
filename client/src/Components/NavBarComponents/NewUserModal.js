@@ -36,9 +36,14 @@ function NewUserModal() {
 
   return (
     <>
-      <button id="newUser" onClick={() => setShowNewUser(true)}>
+      <Button
+        className="custom-btn"
+        id="newUser"
+        onClick={() => setShowNewUser(true)}
+        style={{ marginLeft: "1.5rem", marginRight: "1.5rem" }}
+      >
         Add New User
-      </button>
+      </Button>
       <Modal centered show={showNewUser} onHide={() => setShowNewUser(false)}>
         <Modal.Body>
           <Form id="new-user-form">

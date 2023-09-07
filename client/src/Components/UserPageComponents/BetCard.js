@@ -2,7 +2,6 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/esm/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { useEffect, useState } from "react";
-import "./bet.css";
 
 function BetCard({
   currentUser,
@@ -112,7 +111,9 @@ function BetCard({
           <h2>{odds}</h2>
           <h3>${amount.toLocaleString()}</h3>
           <h3>${winnings.toLocaleString()}</h3>
-          <Button onClick={handleBetDelete}>Refund</Button>
+          <Button className="custom-btn" onClick={handleBetDelete}>
+            Refund
+          </Button>
           <br />
           {currentUser.name === "dev" ? (
             <ButtonGroup>

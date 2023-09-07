@@ -1,0 +1,20 @@
+#change-password {
+  text-align: right;
+  cursor: pointer;
+  padding-top: 2px;
+  font-style: italic;
+}
+
+#change-password:hover {
+  font-weight: 300;
+}
+
+#goodPassword {
+  color: green;
+  font-style: italic;
+}
+
+#badPassword {
+  color: red;
+  font-style: italic;
+}

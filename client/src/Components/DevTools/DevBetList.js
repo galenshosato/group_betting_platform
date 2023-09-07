@@ -26,7 +26,9 @@ function DevBetList({ week, setWeek, currentUser, showAddBet, setShowAddBet }) {
     <>
       <div>
         <h1>Week {week} Bets</h1>
-        <Button onClick={handleWeekUpdate}>Update Week</Button>
+        <Button className="custom-btn" onClick={handleWeekUpdate}>
+          Update Week
+        </Button>
       </div>
       <br />
       <div>
@@ -43,7 +45,9 @@ function DevBetList({ week, setWeek, currentUser, showAddBet, setShowAddBet }) {
           currentUser={currentUser}
         />
       ) : null}
-      <Button onClick={() => setShowAddBet(true)}>Make New Bet</Button>
+      <Button className="custom-btn" onClick={() => setShowAddBet(true)}>
+        Make New Bet
+      </Button>
     </>
   );
 }

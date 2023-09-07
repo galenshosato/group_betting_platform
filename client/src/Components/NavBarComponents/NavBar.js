@@ -68,7 +68,12 @@ function NavBar({ currentUser, setCurrentUser, week }) {
             )}
             {currentUser.name === "dev" ? <NewUserModal /> : null}
             {currentUser.name ? (
-              <Button id="logout-btn" onClick={handleLogout}>
+              <Button
+                id="logout-btn"
+                className="custom-btn"
+                onClick={handleLogout}
+                style={{ marginLeft: "2.5rem" }}
+              >
                 Logout
               </Button>
             ) : null}

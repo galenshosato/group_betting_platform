@@ -7,7 +7,7 @@ function HomePage({ week }) {
     <>
       <RankingList week={week} />
       <WeeklySound />
-      {/* <WeeklyScript /> */}
+      <WeeklyScript />
     </>
   );
 }

@@ -57,7 +57,9 @@ function BetList({
           setFuturesList={setFuturesList}
         />
       ) : null}
-      <Button onClick={() => setShowAddBet(true)}>Make New Bet</Button>
+      <Button className="custom-btn" onClick={() => setShowAddBet(true)}>
+        Make New Bet
+      </Button>
     </>
   );
 }

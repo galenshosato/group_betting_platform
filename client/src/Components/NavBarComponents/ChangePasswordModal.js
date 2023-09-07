@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import LoginModal from "./LoginModal";
+import "../../css/modal.css";
 
 function ChangePasswordModal({
   showChangePassword,
@@ -85,13 +86,14 @@ function ChangePasswordModal({
               />
             </Form.Group>
           </Form>
-          {newPass === newPassConfirm ? (
+          {newPass && newPassConfirm && newPass === newPassConfirm ? (
             <span id="goodPassword">Password matches!</span>
-          ) : (
+          ) : null}
+          {newPass && newPassConfirm && newPass !== newPassConfirm ? (
             <span id="badPassword">
               Password does not match, please re-enter
             </span>
-          )}
+          ) : null}
         </Modal.Body>
         <br></br>
         <Modal.Footer>

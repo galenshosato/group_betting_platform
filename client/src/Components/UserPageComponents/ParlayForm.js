@@ -96,7 +96,9 @@ function ParlayForm({
               />
             </Form.Group>
           </Form>
-          <Button onClick={handleParlay}>Parlay</Button>
+          <Button className="custom-btn" onClick={handleParlay}>
+            Parlay
+          </Button>
         </Card.Body>
       </Card>
     </>

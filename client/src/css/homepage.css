@@ -1,0 +1,11 @@
+.weekly-script {
+  justify-content: center;
+  padding-top: 10%;
+  width: 1000px;
+}
+
+.weekly-script-card {
+  justify-content: center;
+  text-align: center;
+  color: whitesmoke;
+}

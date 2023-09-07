@@ -1,0 +1,49 @@
+.ranking-card {
+  width: 900px;
+  height: 90px;
+  margin-left: 6%;
+  color: whitesmoke;
+}
+
+.horizontal-container {
+  display: flex;
+  align-items: center;
+}
+
+#cardRank {
+  position: absolute;
+  top: 17%;
+  left: 5%;
+}
+
+#cardName {
+  position: absolute;
+  top: 17%;
+  left: 15%;
+}
+
+#rankMoney {
+  position: absolute;
+  left: 36%;
+  top: 25%;
+}
+
+#rankDifference {
+  position: absolute;
+  left: 60%;
+  top: 25%;
+}
+
+.rankPercent {
+  position: absolute;
+  left: 76%;
+  top: 28%;
+}
+
+.positive-percent {
+  color: green;
+}
+
+.negative-percent {
+  color: red;
+}

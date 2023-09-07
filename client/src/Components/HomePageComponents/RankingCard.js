@@ -1,4 +1,5 @@
 import Card from "react-bootstrap/Card";
+import "../../css/rankCard.css";
 
 function RankingCard({ user, week, rank }) {
   const { name, money } = user;
@@ -11,17 +12,21 @@ function RankingCard({ user, week, rank }) {
 
   return (
     <>
-      <Card>
+      <Card className="ranking-card" bg="dark" border="warning">
         <Card.Body>
-          <h1>{rank}</h1>
-          <h1>{name}</h1>
-          <h2>{money}</h2>
-          <h2>{difference}</h2>
-          {difference >= 0 ? (
-            <h3>{upPercentage}%</h3>
-          ) : (
-            <h3>{downPercentage}%</h3>
-          )}
+          <div className="horizontal-container">
+            <h1 id="cardRank">{rank}</h1>
+            <h1 id="cardName">{name}</h1>
+            <h2 id="rankMoney">{money}</h2>
+            <h2 id="rankDifference">{difference}</h2>
+            {difference >= 0 ? (
+              <h3 className="positive-percent rankPercent">{upPercentage}%</h3>
+            ) : (
+              <h3 className="negative-percent rankPercent">
+                {downPercentage}%
+              </h3>
+            )}
+          </div>
         </Card.Body>
       </Card>
     </>

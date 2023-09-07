@@ -55,7 +55,7 @@ function App() {
         week={week}
       />
       <br></br>
-      <h1>Week {week}</h1>
+      <h1 id="weekNumber">Week {week}</h1>
       <Routes>
         <Route element={<HomePage week={week} />} path="/" />
         {currentUser.name === "dev" ? (

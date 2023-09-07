@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ChangePasswordModal from "./ChangePasswordModal";
+import "../../css/modal.css";
 
 function LoginModal({ setCurrentUser }) {
   const [showLogin, setShowLogin] = useState(false);
@@ -56,7 +57,9 @@ function LoginModal({ setCurrentUser }) {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Enter Password" />
             </Form.Group>
-            <span onClick={handleClick}>Change Password</span>
+            <div id="change-password">
+              <span onClick={handleClick}>Change Password?</span>
+            </div>
           </Form>
         </Modal.Body>
         <Modal.Footer>
