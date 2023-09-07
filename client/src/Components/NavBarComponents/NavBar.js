@@ -23,7 +23,7 @@ function NavBar({ currentUser, setCurrentUser, week }) {
   return (
     <>
       <Navbar bg="dark" variant="dark">
-        <Container>
+        <Container fluid style={{ maxWidth: "1500px" }}>
           <Nav className="me-auto">
             <Nav.Link id="home" href="/">
               Home
