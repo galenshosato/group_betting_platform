@@ -64,6 +64,7 @@ function UserPage({ currentUser, week, setShowAddBet, showAddBet }) {
               setFuturesList={setFuturesList}
               showAddBet={showAddBet}
               setShowAddBet={setShowAddBet}
+              currentUser={currentUser}
             />
           </Col>
           <Col md={6}>
@@ -82,6 +83,7 @@ function UserPage({ currentUser, week, setShowAddBet, showAddBet }) {
           futures_money={userFuturesMoney}
           setFuturesList={setFuturesList}
           setUserFuturesMoney={setUserFuturesMoney}
+          currentUser={currentUser}
         />
       </Container>
     </>

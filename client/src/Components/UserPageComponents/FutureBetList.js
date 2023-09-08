@@ -8,6 +8,7 @@ function FutureBetList({
   setFuturesList,
   setUserFuturesMoney,
   futures_money,
+  currentUser,
 }) {
   useEffect(() => {
     fetch(`/api/${id}/current-futures-bets`)
@@ -26,6 +27,7 @@ function FutureBetList({
             futuresList={futuresList}
             setFuturesList={setFuturesList}
             setUserFuturesMoney={setUserFuturesMoney}
+            currentUser={currentUser}
           />
         );
       })}

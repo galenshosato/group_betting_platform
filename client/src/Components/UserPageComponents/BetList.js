@@ -15,6 +15,7 @@ function BetList({
   setFuturesList,
   showAddBet,
   setShowAddBet,
+  currentUser,
 }) {
   const [betList, setBetList] = useState([]);
 
@@ -40,6 +41,7 @@ function BetList({
             futures_money={futures_money}
             setUserWeeklyMoney={setUserWeeklyMoney}
             setUserFuturesMoney={setUserFuturesMoney}
+            currentUser={currentUser}
           />
         );
       })}
@@ -56,6 +58,7 @@ function BetList({
           setShowAddBet={setShowAddBet}
           futuresList={futuresList}
           setFuturesList={setFuturesList}
+          currentUser={currentUser}
         />
       ) : null}
       <Button className="custom-btn" onClick={() => setShowAddBet(true)}>
