@@ -71,43 +71,5 @@ if __name__ == "__main__":
 
         print("Seeding bets...")
 
-        bet1 = Bet(
-            bet_name="Test Bet 1",
-            amount=100,
-            winnings=200,
-            odds=200,
-            week=3,
-            user_id=1,
-            bet_type="weekly",
-        )
-        bet2 = Bet(
-            bet_name="Test Bet 2",
-            amount=500,
-            winnings=300,
-            odds=-350,
-            week=1,
-            user_id=1,
-            bet_type="weekly",
-        )
-        bet3 = Bet(
-            bet_name="Test Bet 3",
-            amount=1000,
-            winnings=500,
-            odds=150,
-            week=0,
-            user_id=1,
-            bet_type="futures",
-        )
-        bet4 = Bet(
-            bet_name="Test Bet 4",
-            amount=1500,
-            winnings=30,
-            odds=-750,
-            week=0,
-            user_id=1,
-            bet_type="futures",
-        )
-
         db.session.add_all(users)
-        db.session.add_all([bet1, bet2, bet3, bet4])
         db.session.commit()

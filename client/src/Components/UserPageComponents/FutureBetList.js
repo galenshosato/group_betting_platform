@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import BetCard from "./BetCard";
+import "../../css/userPage.css";
 
 function FutureBetList({
   id,
@@ -15,7 +16,7 @@ function FutureBetList({
   }, [id, setFuturesList]);
   return (
     <>
-      <h1>Futures Bets</h1>
+      <h1 className="text-color">Futures Bets</h1>
       {futuresList.map((bet) => {
         return (
           <BetCard

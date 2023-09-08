@@ -1,4 +1,8 @@
 import { useState, useEffect } from "react";
+import Container from "react-bootstrap/esm/Container";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
+import "../../css/userPage.css";
 import BetList from "./BetList";
 import UserDashboard from "./UserDashboard";
 import FutureBetList from "./FutureBetList";
@@ -46,30 +50,40 @@ function UserPage({ currentUser, week, setShowAddBet, showAddBet }) {
 
   return (
     <>
-      <UserDashboard
-        currentUser={currentUser}
-        weekly_money={userWeeklyMoney}
-        futures_money={userFuturesMoney}
-      />
-      <BetList
-        week={week}
-        id={currentUser.id}
-        weekly_money={userWeeklyMoney}
-        futures_money={userFuturesMoney}
-        setUserWeeklyMoney={setUserWeeklyMoney}
-        setUserFuturesMoney={setUserFuturesMoney}
-        futuresList={futuresList}
-        setFuturesList={setFuturesList}
-        showAddBet={showAddBet}
-        setShowAddBet={setShowAddBet}
-      />
-      <FutureBetList
-        id={currentUser.id}
-        futuresList={futuresList}
-        futures_money={userFuturesMoney}
-        setFuturesList={setFuturesList}
-        setUserFuturesMoney={setUserFuturesMoney}
-      />
+      <Container>
+        <Row>
+          <Col md={6}>
+            <BetList
+              week={week}
+              id={currentUser.id}
+              weekly_money={userWeeklyMoney}
+              futures_money={userFuturesMoney}
+              setUserWeeklyMoney={setUserWeeklyMoney}
+              setUserFuturesMoney={setUserFuturesMoney}
+              futuresList={futuresList}
+              setFuturesList={setFuturesList}
+              showAddBet={showAddBet}
+              setShowAddBet={setShowAddBet}
+            />
+          </Col>
+          <Col md={6}>
+            <UserDashboard
+              currentUser={currentUser}
+              weekly_money={userWeeklyMoney}
+              futures_money={userFuturesMoney}
+            />
+          </Col>
+        </Row>
+      </Container>
+      <Container>
+        <FutureBetList
+          id={currentUser.id}
+          futuresList={futuresList}
+          futures_money={userFuturesMoney}
+          setFuturesList={setFuturesList}
+          setUserFuturesMoney={setUserFuturesMoney}
+        />
+      </Container>
     </>
   );
 }

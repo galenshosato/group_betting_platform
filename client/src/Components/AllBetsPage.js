@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import ReducedBetCard from "./ReducedBetCard";
 import Container from "react-bootstrap/esm/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/esm/Button";
 import "../css/allbets.css";
 
@@ -29,17 +31,19 @@ function AllBetsPage({ week, groupAndSort }) {
       <Container>
         <h1 id="allBetsWeek">Week {week}</h1>
         <br />
-        <div>
-          {groupedUserBets.map(([userName, bets]) => (
-            <div key={userName}>
-              <h2 className="names">{userName}</h2>
-              {bets.map((bet) => {
-                return <ReducedBetCard key={bet.id} bet={bet} />;
-              })}
-              <br />
-            </div>
-          ))}
-        </div>
+        <Row>
+          <Col lg={6} md={6}>
+            {groupedUserBets.map(([userName, bets]) => (
+              <div key={userName}>
+                <h2 className="names">{userName}</h2>
+                {bets.map((bet) => {
+                  return <ReducedBetCard key={bet.id} bet={bet} />;
+                })}
+                <br />
+              </div>
+            ))}
+          </Col>
+        </Row>
       </Container>
       <br />
       <Container>
@@ -53,15 +57,19 @@ function AllBetsPage({ week, groupAndSort }) {
       <br />
       {showFutures ? (
         <Container>
-          {groupedFutureBets.map(([userName, bets]) => (
-            <div key={userName}>
-              <h2 className="names">{userName}</h2>
-              {bets.map((bet) => {
-                return <ReducedBetCard key={bet.id} bet={bet} />;
-              })}
-              <br />
-            </div>
-          ))}
+          <Row>
+            <Col lg={6} md={6}>
+              {groupedFutureBets.map(([userName, bets]) => (
+                <div key={userName}>
+                  <h2 className="names">{userName}</h2>
+                  {bets.map((bet) => {
+                    return <ReducedBetCard key={bet.id} bet={bet} />;
+                  })}
+                  <br />
+                </div>
+              ))}
+            </Col>
+          </Row>
         </Container>
       ) : null}
     </>

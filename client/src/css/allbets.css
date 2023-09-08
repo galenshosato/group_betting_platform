@@ -3,6 +3,11 @@
   padding-bottom: 0.5rem;
 }
 
+/* TO DO */
+/* 1. Add bets so that I can see what the other cards look like and the figure out how to have a certain amount of them show  */
+/* 2. Figure out how to make them go vertically in columns */
+/* *idea* Would it make more sense to paginate through them? Or should I see all of them at once? */
+
 .card-container {
 }
 

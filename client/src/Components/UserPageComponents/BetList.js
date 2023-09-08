@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import BetCard from "./BetCard";
 import Button from "react-bootstrap/Button";
 import AddNewBetForm from "./AddNewBetForm";
+import "../../css/userPage.css";
 
 function BetList({
   week,
@@ -25,7 +26,7 @@ function BetList({
 
   return (
     <>
-      <h1>Weekly Bets</h1>
+      <h1 className="text-color">Weekly Bets</h1>
       <br />
       {betList.map((bet) => {
         return (
