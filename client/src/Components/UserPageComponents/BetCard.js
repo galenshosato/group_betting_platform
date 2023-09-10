@@ -2,6 +2,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/esm/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { useEffect, useState } from "react";
+import "../../css/userPage.css";
 
 function BetCard({
   currentUser,
@@ -103,30 +104,55 @@ function BetCard({
 
   return (
     <>
-      <Card className={cardClass}>
+      <Card className={`bet-card ${cardClass}`}>
         <Card.Body>
           {currentUser.name === "dev" ? <h2>{names[user_id]}</h2> : null}
-          <h3>Week {week}</h3>
-          <h2>{bet_name}</h2>
-          <h2>{odds}</h2>
-          <h3>${amount.toLocaleString()}</h3>
-          <h3>${winnings.toLocaleString()}</h3>
-          <Button className="custom-btn" onClick={handleBetDelete}>
-            Refund
-          </Button>
-          <br />
+          <div className="name-odds">
+            <h3>{bet_name}</h3>
+            {odds > 0 ? <h3>+{odds}</h3> : <h3> {odds}</h3>}
+          </div>
+          <div className="amount-winnings">
+            <div className="amount">
+              <span>Wager</span>
+              <h3>${amount.toLocaleString()}</h3>
+            </div>{" "}
+            <div className="winnings">
+              <span>To Win</span>
+              <h3>${winnings.toLocaleString()}</h3>
+            </div>
+            <div>
+              <Button className="custom-btn" onClick={handleBetDelete}>
+                Refund
+              </Button>
+            </div>
+          </div>
           {currentUser.name === "dev" ? (
-            <ButtonGroup>
-              <Button variant="success" onClick={changeBetSuccess} value="hit">
-                Hit
-              </Button>
-              <Button variant="warning" value="push" onClick={changeBetSuccess}>
-                Push
-              </Button>
-              <Button variant="danger" value="miss" onClick={changeBetSuccess}>
-                Miss
-              </Button>
-            </ButtonGroup>
+            <>
+              <br />
+              <ButtonGroup>
+                <Button
+                  variant="success"
+                  onClick={changeBetSuccess}
+                  value="hit"
+                >
+                  Hit
+                </Button>
+                <Button
+                  variant="warning"
+                  value="push"
+                  onClick={changeBetSuccess}
+                >
+                  Push
+                </Button>
+                <Button
+                  variant="danger"
+                  value="miss"
+                  onClick={changeBetSuccess}
+                >
+                  Miss
+                </Button>
+              </ButtonGroup>
+            </>
           ) : null}
         </Card.Body>
       </Card>

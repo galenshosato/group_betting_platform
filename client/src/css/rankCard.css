@@ -42,8 +42,10 @@
 
 .positive-percent {
   color: green;
+  font-size: 30px;
 }
 
 .negative-percent {
   color: red;
+  font-size: 30px;
 }

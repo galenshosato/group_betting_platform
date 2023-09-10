@@ -7,8 +7,8 @@ function RankingCard({ user, week, rank }) {
   let difference = money - total;
   let upPercentage = (total / difference) * 100;
   let downPercentage = (-difference / total) * 100;
-  upPercentage = Math.round(upPercentage * 10) / 10;
-  downPercentage = Math.round(downPercentage * 10) / 10;
+  upPercentage = Math.round(upPercentage) / 10;
+  downPercentage = Math.round(downPercentage) / 10;
 
   return (
     <>
@@ -20,11 +20,13 @@ function RankingCard({ user, week, rank }) {
             <h2 id="rankMoney">{money}</h2>
             <h2 id="rankDifference">{difference}</h2>
             {difference >= 0 ? (
-              <h3 className="positive-percent rankPercent">{upPercentage}%</h3>
+              <div className="rankPercent">
+                <h3 className="positive-percent">{upPercentage}%</h3>
+              </div>
             ) : (
-              <h3 className="negative-percent rankPercent">
-                {downPercentage}%
-              </h3>
+              <div className="rankPercent">
+                <h3 className="negative-percent">{downPercentage}%</h3>
+              </div>
             )}
           </div>
         </Card.Body>

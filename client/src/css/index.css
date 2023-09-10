@@ -2,6 +2,10 @@ body {
   background-color: black;
 }
 
+.text-color {
+  color: goldenrod;
+}
+
 .custom-btn {
   background-color: goldenrod;
   color: white;

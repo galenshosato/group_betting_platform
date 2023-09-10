@@ -12,7 +12,7 @@
 }
 
 .allCardBets {
-  width: 500px;
+  width: 420px;
   max-height: 100px;
 }
 
@@ -21,30 +21,30 @@
   align-items: center;
   font-weight: 200;
   font-style: italic;
-  justify-content: space-evenly;
+  justify-content: space-between;
   font-size: x-small;
-}
-
-#winnings-span {
-  margin-right: 15px;
+  padding-left: 5px;
 }
 
 .bet-and-odds {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .bet-and-odds h2 {
-  font-size: 1.5rem;
+  font-size: 16px;
+  font-weight: 500;
+  padding-left: 5px;
 }
 
 .wagered-and-won {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  padding-left: 5px;
 }
 
 h3 {
-  font-size: large;
+  font-size: medium;
 }

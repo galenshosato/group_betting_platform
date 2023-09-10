@@ -25,14 +25,14 @@ function DevBetList({ week, setWeek, currentUser, showAddBet, setShowAddBet }) {
   return (
     <>
       <div>
-        <h1>Week {week} Bets</h1>
+        <h1 className="text-color">Week {week} Bets</h1>
         <Button className="custom-btn" onClick={handleWeekUpdate}>
           Update Week
         </Button>
       </div>
       <br />
       <div>
-        <h2>Bets To Check</h2>
+        <h2 className="text-color">Bets To Check</h2>
         {weeklyBetList.map((bet) => {
           return <BetCard key={bet.id} bet={bet} currentUser={currentUser} />;
         })}
