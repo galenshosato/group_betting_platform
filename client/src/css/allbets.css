@@ -48,3 +48,15 @@
 h3 {
   font-size: medium;
 }
+
+.hit-bg {
+  background-color: green;
+}
+
+.push-bg {
+  background-color: yellow;
+}
+
+.miss-bg {
+  background-color: red;
+}

@@ -245,6 +245,8 @@ def get_bet(id, bet_id):
             db.session.add(user)
             db.session.commit()
         else:
+            user.money -= bet.amount
+            db.session.add(user)
             db.session.commit()
         return make_response(jsonify(bet.to_dict()), 200)
 

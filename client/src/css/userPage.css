@@ -46,3 +46,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+.dev-bet-card {
+  width: 500px;
+}

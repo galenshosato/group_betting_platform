@@ -31,7 +31,7 @@ function NavBar({ currentUser, setCurrentUser, week }) {
             {currentUser.name && (
               <>
                 {currentUser.name === "dev" && (
-                  <Nav.Link id="allBets" href="/dev/betlist">
+                  <Nav.Link id="allBets" href="/dev/weekly-bets">
                     Week {week} Bets (Dev)
                   </Nav.Link>
                 )}
@@ -64,13 +64,16 @@ function NavBar({ currentUser, setCurrentUser, week }) {
                 </Navbar.Text>
               </>
             ) : (
-              <LoginModal id="login" setCurrentUser={setCurrentUser} />
+              <LoginModal
+                id="login"
+                setCurrentUser={setCurrentUser}
+                currentUser={currentUser}
+              />
             )}
             {currentUser.name === "dev" ? <NewUserModal /> : null}
             {currentUser.name ? (
               <Button
                 id="logout-btn"
-                className="custom-btn"
                 onClick={handleLogout}
                 style={{ marginLeft: "2.5rem" }}
               >

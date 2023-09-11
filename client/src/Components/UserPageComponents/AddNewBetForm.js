@@ -176,9 +176,7 @@ function AddNewBetForm({
     <>
       <Card>
         <Card.Body>
-          <Button className="custom-btn" onClick={() => setShowAddBet(false)}>
-            X
-          </Button>
+          <Button onClick={() => setShowAddBet(false)}>X</Button>
           {currentUser.name === "dev" ? (
             <DevDropdown setDevUserId={setDevUserId} />
           ) : null}
@@ -222,9 +220,7 @@ function AddNewBetForm({
               />
             </Form.Group>
           </Form>
-          <Button className="custom-btn" onClick={handleParlay}>
-            Parlay
-          </Button>
+          <Button onClick={handleParlay}>Parlay</Button>
         </Card.Body>
       </Card>
       {showParlayForm ? (
@@ -237,7 +233,6 @@ function AddNewBetForm({
         />
       ) : null}
       <Button
-        className="custom-btn"
         onClick={
           currentUser.name === "dev" ? handleDevBetSubmit : handleBetSubmit
         }

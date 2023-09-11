@@ -15,7 +15,9 @@ function BetHistoryDropdown({ week, dropDownArray, setPastBetList }) {
   return (
     <>
       <Dropdown>
-        <Dropdown.Toggle>{pastSelectedOption}</Dropdown.Toggle>
+        <Dropdown.Toggle className="custom-btn">
+          {pastSelectedOption}
+        </Dropdown.Toggle>
         <Dropdown.Menu>
           {dropDownArray.map(([newWeek, weekValue]) => {
             return (

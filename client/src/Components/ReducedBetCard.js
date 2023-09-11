@@ -1,16 +1,38 @@
 import Card from "react-bootstrap/Card";
 import "../css/allbets.css";
+import { useState, useEffect } from "react";
 
 function ReducedBetCard({ bet }) {
+  const [cardBg, setCardBg] = useState("");
   function betOddsCatch(odds) {
     if (bet.odds > 0 && !odds.toString().includes("+")) {
       return `+${odds}`;
     }
     return odds;
   }
+
+  useEffect(() => {
+    let newCardClass = "";
+
+    switch (bet.hit) {
+      case "hit":
+        newCardClass = "hit-bg";
+        break;
+      case "push":
+        newCardClass = "push-bg";
+        break;
+      case "miss":
+        newCardClass = "miss-bg";
+        break;
+      default:
+        break;
+    }
+    setCardBg(newCardClass);
+  }, [bet.hit]);
+
   return (
     <>
-      <Card className="allCardBets">
+      <Card className={`allCardBets ${cardBg}`}>
         <Card.Body>
           <div className="bet-and-odds">
             <h2>{bet.bet_name}</h2>

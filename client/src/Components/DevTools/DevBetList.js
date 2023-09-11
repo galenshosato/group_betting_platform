@@ -3,7 +3,14 @@ import Button from "react-bootstrap/Button";
 import BetCard from "../UserPageComponents/BetCard";
 import AddNewBetForm from "../UserPageComponents/AddNewBetForm";
 
-function DevBetList({ week, setWeek, currentUser, showAddBet, setShowAddBet }) {
+function DevBetList({
+  week,
+  setWeek,
+  currentUser,
+  showAddBet,
+  setShowAddBet,
+  groupAndSort,
+}) {
   const [weeklyBetList, setWeeklyBetList] = useState([]);
 
   useEffect(() => {
@@ -22,20 +29,29 @@ function DevBetList({ week, setWeek, currentUser, showAddBet, setShowAddBet }) {
     });
   }
 
+  const groupedBetList = groupAndSort(weeklyBetList);
+
   return (
     <>
       <div>
         <h1 className="text-color">Week {week} Bets</h1>
-        <Button className="custom-btn" onClick={handleWeekUpdate}>
-          Update Week
-        </Button>
+        <Button onClick={handleWeekUpdate}>Update Week</Button>
       </div>
       <br />
       <div>
         <h2 className="text-color">Bets To Check</h2>
-        {weeklyBetList.map((bet) => {
-          return <BetCard key={bet.id} bet={bet} currentUser={currentUser} />;
-        })}
+        <br />
+        {groupedBetList.map(([userName, bets]) => (
+          <div key={userName}>
+            <h2 className="names">{userName}</h2>
+            {bets.map((bet) => {
+              return (
+                <BetCard key={bet.id} bet={bet} currentUser={currentUser} />
+              );
+            })}
+            <br />
+          </div>
+        ))}
       </div>
       {showAddBet ? (
         <AddNewBetForm

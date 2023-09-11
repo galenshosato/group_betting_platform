@@ -4,10 +4,12 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ChangePasswordModal from "./ChangePasswordModal";
 import "../../css/modal.css";
+import { useNavigate } from "react-router-dom";
 
-function LoginModal({ setCurrentUser }) {
+function LoginModal({ setCurrentUser, currentUser }) {
   const [showLogin, setShowLogin] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
+  const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -26,7 +28,10 @@ function LoginModal({ setCurrentUser }) {
       body: JSON.stringify(data),
     })
       .then((resp) => resp.json())
-      .then((data) => setCurrentUser(data));
+      .then((data) => {
+        setCurrentUser(data);
+        navigate(`/${data.name}/weekly-bets`);
+      });
 
     setShowLogin(false);
   }
@@ -38,11 +43,7 @@ function LoginModal({ setCurrentUser }) {
 
   return (
     <>
-      <Button
-        className="custom-btn"
-        id="login"
-        onClick={() => setShowLogin(true)}
-      >
+      <Button id="login" onClick={() => setShowLogin(true)}>
         Login
       </Button>
       <Modal centered show={showLogin} onHide={() => setShowLogin(false)}>
@@ -63,10 +64,8 @@ function LoginModal({ setCurrentUser }) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <a>
-            <Button className="custom-btn" onClick={handleSubmit}>
-              Login
-            </Button>
+          <a href={`/${currentUser.name}/weekly-bets`}>
+            <Button onClick={handleSubmit}>Login</Button>
           </a>
         </Modal.Footer>
       </Modal>

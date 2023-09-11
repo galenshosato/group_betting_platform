@@ -34,7 +34,7 @@ function BetHistory({ week, groupAndSort }) {
       {pastBetList.length !== 0 ? (
         groupedPastBets.map(([userName, bets]) => (
           <div key={userName}>
-            <h2>{userName}</h2>
+            <h2 className="text-color">{userName}</h2>
             {bets.map((bet) => {
               return <ReducedBetCard key={bet.id} bet={bet} />;
             })}
@@ -42,7 +42,7 @@ function BetHistory({ week, groupAndSort }) {
           </div>
         ))
       ) : (
-        <h1>No Past Bets Available</h1>
+        <h1 className="text-color">No Past Bets Available</h1>
       )}
     </>
   );

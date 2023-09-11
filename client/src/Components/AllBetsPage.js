@@ -47,10 +47,7 @@ function AllBetsPage({ week, groupAndSort }) {
       </Container>
       <br />
       <Container>
-        <Button
-          className="custom-btn"
-          onClick={() => setShowFutures((prevState) => !prevState)}
-        >
+        <Button onClick={() => setShowFutures((prevState) => !prevState)}>
           Futures Bets
         </Button>
       </Container>

@@ -61,9 +61,7 @@ function BetList({
           currentUser={currentUser}
         />
       ) : null}
-      <Button className="custom-btn" onClick={() => setShowAddBet(true)}>
-        Make New Bet
-      </Button>
+      <Button onClick={() => setShowAddBet(true)}>Make New Bet</Button>
     </>
   );
 }

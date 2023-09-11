@@ -6,15 +6,16 @@ body {
   color: goldenrod;
 }
 
-.custom-btn {
+.btn-primary {
   background-color: goldenrod;
   color: white;
   border-color: goldenrod;
+  --bs-btn-active-bg: goldenrod;
+  --bs-btn-active-border-color: goldenrod;
 }
 
-.custom-btn:hover {
+.btn-primary:hover {
   background-color: gold;
-  color: white;
   border-color: goldenrod;
 }
 

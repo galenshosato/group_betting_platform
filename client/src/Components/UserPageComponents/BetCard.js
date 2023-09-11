@@ -104,7 +104,11 @@ function BetCard({
 
   return (
     <>
-      <Card className={`bet-card ${cardClass}`}>
+      <Card
+        className={`${
+          currentUser.name === "dev" ? "dev-bet-card" : "bet-card"
+        } ${cardClass}`}
+      >
         <Card.Body>
           {currentUser.name === "dev" ? <h2>{names[user_id]}</h2> : null}
           <div className="name-odds">
@@ -121,38 +125,22 @@ function BetCard({
               <h3>${winnings.toLocaleString()}</h3>
             </div>
             <div>
-              <Button className="custom-btn" onClick={handleBetDelete}>
-                Refund
-              </Button>
+              <Button onClick={handleBetDelete}>Refund</Button>
             </div>
           </div>
+
           {currentUser.name === "dev" ? (
-            <>
-              <br />
-              <ButtonGroup>
-                <Button
-                  variant="success"
-                  onClick={changeBetSuccess}
-                  value="hit"
-                >
-                  Hit
-                </Button>
-                <Button
-                  variant="warning"
-                  value="push"
-                  onClick={changeBetSuccess}
-                >
-                  Push
-                </Button>
-                <Button
-                  variant="danger"
-                  value="miss"
-                  onClick={changeBetSuccess}
-                >
-                  Miss
-                </Button>
-              </ButtonGroup>
-            </>
+            <ButtonGroup>
+              <Button variant="success" onClick={changeBetSuccess} value="hit">
+                Hit
+              </Button>
+              <Button variant="warning" onClick={changeBetSuccess} value="push">
+                Push
+              </Button>
+              <Button variant="danger" onClick={changeBetSuccess} value="miss">
+                Miss
+              </Button>
+            </ButtonGroup>
           ) : null}
         </Card.Body>
       </Card>

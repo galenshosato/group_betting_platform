@@ -97,9 +97,7 @@ function ChangePasswordModal({
         </Modal.Body>
         <br></br>
         <Modal.Footer>
-          <Button className="custom-btn" onClick={handleSubmit}>
-            Submit
-          </Button>
+          <Button onClick={handleSubmit}>Submit</Button>
         </Modal.Footer>
       </Modal>
       {showLogin ? <LoginModal /> : null}

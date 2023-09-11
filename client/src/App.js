@@ -67,9 +67,10 @@ function App() {
                 currentUser={currentUser}
                 showAddBet={showAddBet}
                 setShowAddBet={setShowAddBet}
+                groupAndSort={groupAndSort}
               />
             }
-            path="/dev/betlist"
+            path="/dev/weekly-bets"
           />
         ) : (
           <Route
