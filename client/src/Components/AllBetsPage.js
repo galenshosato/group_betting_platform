@@ -53,20 +53,16 @@ function AllBetsPage({ week, groupAndSort }) {
       </Container>
       <br />
       {showFutures ? (
-        <Container>
-          <Row>
-            <Col lg={6} md={6}>
-              {groupedFutureBets.map(([userName, bets]) => (
-                <div key={userName}>
-                  <h2 className="names">{userName}</h2>
-                  {bets.map((bet) => {
-                    return <ReducedBetCard key={bet.id} bet={bet} />;
-                  })}
-                  <br />
-                </div>
-              ))}
-            </Col>
-          </Row>
+        <Container className="card-container">
+          {groupedFutureBets.map(([userName, bets]) => (
+            <div key={userName} className="card-item">
+              <h2 className="names">{userName}</h2>
+              {bets.map((bet) => {
+                return <ReducedBetCard key={bet.id} bet={bet} />;
+              })}
+              <br />
+            </div>
+          ))}
         </Container>
       ) : null}
     </>

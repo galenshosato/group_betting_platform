@@ -47,14 +47,13 @@ function ParlayForm({
   function handleParlay() {
     let decimalOdds = americanToDecimalOdds(parlayOdds);
     for (const bet of parlayArr) {
-      console.log(bet);
       let tempOdds = americanToDecimalOdds(bet.odds);
       decimalOdds = decimalOdds * tempOdds;
     }
     let pOdds = decimalToAmericanOdds(decimalOdds);
     setNewBetOdds(pOdds);
 
-    setNewBet((prev) => prev + " | " + parlayName);
+    setNewBet((prev) => prev + ", " + parlayName);
 
     const betData = {
       name: parlayName,

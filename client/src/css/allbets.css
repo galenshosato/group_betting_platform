@@ -8,9 +8,6 @@
 /* 2. Figure out how to make them go vertically in columns */
 /* *idea* Would it make more sense to paginate through them? Or should I see all of them at once? */
 
-.card-container {
-}
-
 .allCardBets {
   width: 420px;
   max-height: 100px;

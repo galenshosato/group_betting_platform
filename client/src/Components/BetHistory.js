@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ReducedBetCard from "./ReducedBetCard";
 import BetHistoryDropdown from "./BetHistoryDropdown";
+import Container from "react-bootstrap/esm/Container";
 
 function BetHistory({ week, groupAndSort }) {
   const [pastBetList, setPastBetList] = useState([]);
@@ -26,24 +27,28 @@ function BetHistory({ week, groupAndSort }) {
 
   return (
     <>
-      <BetHistoryDropdown
-        week={week}
-        dropDownArray={dropDownArray}
-        setPastBetList={setPastBetList}
-      />
-      {pastBetList.length !== 0 ? (
-        groupedPastBets.map(([userName, bets]) => (
-          <div key={userName}>
-            <h2 className="text-color">{userName}</h2>
-            {bets.map((bet) => {
-              return <ReducedBetCard key={bet.id} bet={bet} />;
-            })}
-            <br />
-          </div>
-        ))
-      ) : (
-        <h1 className="text-color">No Past Bets Available</h1>
-      )}
+      <div style={{ padding: "20px", marginLeft: "6%" }}>
+        <BetHistoryDropdown
+          week={week}
+          dropDownArray={dropDownArray}
+          setPastBetList={setPastBetList}
+        />
+      </div>
+      <Container className="card-container">
+        {pastBetList.length !== 0 ? (
+          groupedPastBets.map(([userName, bets]) => (
+            <div key={userName} className="card-item">
+              <h2 className="text-color">{userName}</h2>
+              {bets.map((bet) => {
+                return <ReducedBetCard key={bet.id} bet={bet} />;
+              })}
+              <br />
+            </div>
+          ))
+        ) : (
+          <h1 className="text-color">No Past Bets Available</h1>
+        )}
+      </Container>
     </>
   );
 }

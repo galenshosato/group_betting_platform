@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import BetCard from "../UserPageComponents/BetCard";
 import AddNewBetForm from "../UserPageComponents/AddNewBetForm";
+import Container from "react-bootstrap/esm/Container";
 
 function DevBetList({
   week,
@@ -38,11 +39,11 @@ function DevBetList({
         <Button onClick={handleWeekUpdate}>Update Week</Button>
       </div>
       <br />
-      <div>
-        <h2 className="text-color">Bets To Check</h2>
-        <br />
+      <h2 className="text-color">Bets To Check</h2>
+      <br />
+      <Container className="card-container">
         {groupedBetList.map(([userName, bets]) => (
-          <div key={userName}>
+          <div key={userName} className="card-item">
             <h2 className="names">{userName}</h2>
             {bets.map((bet) => {
               return (
@@ -52,15 +53,15 @@ function DevBetList({
             <br />
           </div>
         ))}
-      </div>
-      {showAddBet ? (
-        <AddNewBetForm
-          setWeeklyBetList={setWeeklyBetList}
-          week={week}
-          setShowAddBet={setShowAddBet}
-          currentUser={currentUser}
-        />
-      ) : null}
+        {showAddBet ? (
+          <AddNewBetForm
+            setWeeklyBetList={setWeeklyBetList}
+            week={week}
+            setShowAddBet={setShowAddBet}
+            currentUser={currentUser}
+          />
+        ) : null}
+      </Container>
       <Button className="custom-btn" onClick={() => setShowAddBet(true)}>
         Make New Bet
       </Button>
