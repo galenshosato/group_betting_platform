@@ -176,26 +176,34 @@ function AddNewBetForm({
     <>
       <Card>
         <Card.Body>
-          <Button onClick={() => setShowAddBet(false)}>X</Button>
           {currentUser.name === "dev" ? (
             <DevDropdown setDevUserId={setDevUserId} />
           ) : null}
           <Form>
-            <Form.Group>
-              <Form.Check
-                type="radio"
-                label="Current"
-                value="Current"
-                checked={selectedRadioValue === "Current"}
-                onChange={handleRadioChange}
-              />
-              <Form.Check
-                type="radio"
-                label="Future"
-                value="Future"
-                checked={selectedRadioValue === "Future"}
-                onChange={handleRadioChange}
-              />
+            <Form.Group
+              className="d-flex justify-content-between"
+              style={{ paddingBottom: "10px" }}
+            >
+              <div className="d-flex">
+                <Form.Check
+                  type="radio"
+                  label="Current"
+                  value="Current"
+                  checked={selectedRadioValue === "Current"}
+                  onChange={handleRadioChange}
+                  style={{ paddingRight: "10px" }}
+                />
+                <Form.Check
+                  type="radio"
+                  label="Future"
+                  value="Future"
+                  checked={selectedRadioValue === "Future"}
+                  onChange={handleRadioChange}
+                />
+              </div>
+              <Button size="sm" onClick={() => setShowAddBet(false)}>
+                X
+              </Button>
             </Form.Group>
             <Form.Group>
               <Form.Control
@@ -203,24 +211,57 @@ function AddNewBetForm({
                 placeholder="New Bet"
                 onChange={handleBetChange}
                 autoFocus
+                style={{ width: "90%" }}
               />
             </Form.Group>
-            <Form.Group>
-              <Form.Control
-                type="text"
-                placeholder="Odds"
-                onChange={handleOddsChange}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Control
-                type="text"
-                placeholder="Wager"
-                onChange={handleWagerChange}
-              />
-            </Form.Group>
+            <div
+              className="d-flex justify-content-between"
+              style={{ marginTop: "5px" }}
+            >
+              <div className="d-flex justify-content-evenly align-items-center">
+                <Form.Group>
+                  <Form.Control
+                    type="text"
+                    placeholder="Wager"
+                    onChange={handleWagerChange}
+                    style={{ width: "90%" }}
+                  />
+                </Form.Group>
+                <div className="d-flex" style={{ paddingLeft: "45px" }}>
+                  <span style={{ fontSize: "20px", paddingRight: "20px" }}>
+                    @
+                  </span>
+                  <Form.Group>
+                    <Form.Control
+                      type="text"
+                      placeholder="Odds"
+                      onChange={handleOddsChange}
+                      style={{ width: "60%" }}
+                    />
+                  </Form.Group>
+                </div>
+              </div>
+              <Button
+                onClick={
+                  currentUser.name === "dev"
+                    ? handleDevBetSubmit
+                    : handleBetSubmit
+                }
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                }}
+              >
+                <span style={{ fontSize: "12px", marginBottom: "2px" }}>
+                  TO WIN ${newWinnings.toLocaleString()}
+                </span>
+                Submit Bet
+              </Button>
+            </div>
           </Form>
-          <Button onClick={handleParlay}>Parlay</Button>
+          {/* <Button onClick={handleParlay}>Parlay</Button> */}
         </Card.Body>
       </Card>
       {showParlayForm ? (
@@ -232,13 +273,6 @@ function AddNewBetForm({
           setNewBet={setNewBet}
         />
       ) : null}
-      <Button
-        onClick={
-          currentUser.name === "dev" ? handleDevBetSubmit : handleBetSubmit
-        }
-      >
-        <span>TO WIN ${newWinnings.toLocaleString()}</span>||Submit Bet
-      </Button>
     </>
   );
 }
