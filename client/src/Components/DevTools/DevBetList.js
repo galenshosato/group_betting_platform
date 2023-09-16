@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 import Button from "react-bootstrap/Button";
 import BetCard from "../UserPageComponents/BetCard";
 import AddNewBetForm from "../UserPageComponents/AddNewBetForm";
@@ -34,13 +36,13 @@ function DevBetList({
 
   return (
     <>
-      <div>
+      <div className="d-flex justify-content-evenly align-items-center">
         <h1 className="text-color">Week {week} Bets</h1>
         <Button onClick={handleWeekUpdate}>Update Week</Button>
       </div>
-      <br />
-      <h2 className="text-color">Bets To Check</h2>
-      <br />
+      <Container style={{ paddingBottom: "20px" }}>
+        <h2 className="text-color">Bets To Check</h2>
+      </Container>
       <Container className="card-container">
         {groupedBetList.map(([userName, bets]) => (
           <div key={userName} className="card-item">
@@ -53,18 +55,24 @@ function DevBetList({
             <br />
           </div>
         ))}
-        {showAddBet ? (
-          <AddNewBetForm
-            setWeeklyBetList={setWeeklyBetList}
-            week={week}
-            setShowAddBet={setShowAddBet}
-            currentUser={currentUser}
-          />
-        ) : null}
       </Container>
-      <Button className="custom-btn" onClick={() => setShowAddBet(true)}>
-        Make New Bet
-      </Button>
+      <Container>
+        <Row>
+          <Col className="col-6 justify-content-start">
+            {showAddBet ? (
+              <AddNewBetForm
+                setWeeklyBetList={setWeeklyBetList}
+                week={week}
+                setShowAddBet={setShowAddBet}
+                currentUser={currentUser}
+              />
+            ) : null}
+            <Button className="custom-btn" onClick={() => setShowAddBet(true)}>
+              Make New Bet
+            </Button>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }

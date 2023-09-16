@@ -17,16 +17,7 @@ function BetCard({
   setFuturesList,
 }) {
   const [cardClass, setCardClass] = useState("");
-  const { amount, bet_name, odds, winnings, id, user_id, week } = bet;
-  const names = {
-    1: "Test",
-    2: "Galen",
-    3: "Chris",
-    4: "Grant",
-    5: "Morgan",
-    6: "Ethan",
-    7: "Spear",
-  };
+  const { amount, bet_name, odds, winnings, id, user_id } = bet;
 
   useEffect(() => {
     let newCardClass = "";
@@ -110,7 +101,6 @@ function BetCard({
         } ${cardClass}`}
       >
         <Card.Body>
-          {currentUser.name === "dev" ? <h2>{names[user_id]}</h2> : null}
           <div className="name-odds">
             <h3>{bet_name}</h3>
             {odds > 0 ? <h3>+{odds}</h3> : <h3> {odds}</h3>}

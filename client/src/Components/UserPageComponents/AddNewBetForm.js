@@ -72,20 +72,24 @@ function AddNewBetForm({
       };
 
       let newWeeklyMoney = weekly_money - +newWager;
-      setUserWeeklyMoney(newWeeklyMoney);
+      if (newWeeklyMoney < 0) {
+        alert("You don't have enough money to place this bet!");
+      } else {
+        setUserWeeklyMoney(newWeeklyMoney);
 
-      fetch(`/api/${id}/current-weekly-bets`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(currentData),
-      })
-        .then((resp) => resp.json())
-        .then((returnData) => {
-          setBetList((prevBetList) => [...prevBetList, returnData]);
-          setShowAddBet(false);
-        });
+        fetch(`/api/${id}/current-weekly-bets`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(currentData),
+        })
+          .then((resp) => resp.json())
+          .then((returnData) => {
+            setBetList((prevBetList) => [...prevBetList, returnData]);
+            setShowAddBet(false);
+          });
+      }
     } else {
       const futureData = {
         amount: +newWager,
@@ -98,20 +102,24 @@ function AddNewBetForm({
       };
 
       let newFuturesMoney = futures_money - +newWager;
-      setUserFuturesMoney(newFuturesMoney);
+      if (newFuturesMoney < 0) {
+        alert("You don't have enough money to place this bet!");
+      } else {
+        setUserFuturesMoney(newFuturesMoney);
 
-      fetch(`/api/${id}/current-futures-bets`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(futureData),
-      })
-        .then((resp) => resp.json())
-        .then((returnData) => {
-          setFuturesList((prevBetList) => [...prevBetList, returnData]);
-          setShowAddBet(false);
-        });
+        fetch(`/api/${id}/current-futures-bets`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(futureData),
+        })
+          .then((resp) => resp.json())
+          .then((returnData) => {
+            setFuturesList((prevBetList) => [...prevBetList, returnData]);
+            setShowAddBet(false);
+          });
+      }
     }
   }
 
@@ -176,9 +184,6 @@ function AddNewBetForm({
     <>
       <Card>
         <Card.Body>
-          {currentUser.name === "dev" ? (
-            <DevDropdown setDevUserId={setDevUserId} />
-          ) : null}
           <Form>
             <Form.Group
               className="d-flex justify-content-between"
@@ -205,13 +210,19 @@ function AddNewBetForm({
                 X
               </Button>
             </Form.Group>
+            {currentUser.name === "dev" ? (
+              <div style={{ paddingBottom: "10px" }}>
+                {" "}
+                <DevDropdown setDevUserId={setDevUserId} />
+              </div>
+            ) : null}
             <Form.Group>
               <Form.Control
                 type="text"
                 placeholder="New Bet"
                 onChange={handleBetChange}
                 autoFocus
-                style={{ width: "90%" }}
+                style={{ width: "80%" }}
               />
             </Form.Group>
             <div
