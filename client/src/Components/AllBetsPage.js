@@ -10,7 +10,7 @@ function AllBetsPage({ week, groupAndSort }) {
   const [showFutures, setShowFutures] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/${week}/get-current-bets`)
+    fetch(`/api/${week}/bets`)
       .then((resp) => resp.json())
       .then((data) => setAllCurrentUsersBets(data));
   }, [week]);

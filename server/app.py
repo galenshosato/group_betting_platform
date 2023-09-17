@@ -131,6 +131,16 @@ def get_single_user(id):
 # Get all current bets for the week
 @app.route("/api/<int:week>/get-current-bets")
 def get_all_current_bets(week):
+    bets = Bet.query.filter(
+        Bet.week == week, Bet.created_at == Bet.updated_at, Bet.bet_type != "futures"
+    ).all()
+    bets_to_dict = [bet.to_dict() for bet in bets]
+    return make_response(jsonify(bets_to_dict), 200)
+
+
+# Get all bets for a given week
+@app.route("/api/<int:week>/bets")
+def get_all_bets_week(week):
     bets = Bet.query.filter(Bet.week == week, Bet.bet_type != "futures").all()
     bets_to_dict = [bet.to_dict() for bet in bets]
     return make_response(jsonify(bets_to_dict), 200)
