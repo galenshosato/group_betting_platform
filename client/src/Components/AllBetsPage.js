@@ -28,22 +28,22 @@ function AllBetsPage({ week, groupAndSort }) {
 
   return (
     <>
-      <Container>
-        <h1 id="allBetsWeek">Week {week}</h1>
-        <br />
-        <Row>
-          <Col lg={6} md={6}>
-            {groupedUserBets.map(([userName, bets]) => (
-              <div key={userName}>
-                <h2 className="names">{userName}</h2>
-                {bets.map((bet) => {
-                  return <ReducedBetCard key={bet.id} bet={bet} />;
-                })}
-                <br />
-              </div>
-            ))}
-          </Col>
-        </Row>
+      <h1
+        className="text-color"
+        style={{ marginLeft: "15.5%", marginBottom: "4%", marginTop: "20px" }}
+      >
+        Week {week}
+      </h1>
+      <Container className="card-container">
+        {groupedUserBets.map(([userName, bets]) => (
+          <div key={userName} className="card-item">
+            <h2 className="names">{userName}</h2>
+            {bets.map((bet) => {
+              return <ReducedBetCard key={bet.id} bet={bet} />;
+            })}
+            <br />
+          </div>
+        ))}
       </Container>
       <br />
       <Container>

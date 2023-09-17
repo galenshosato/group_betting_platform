@@ -53,7 +53,7 @@ function AddNewBetForm({
 
   function handleWagerChange(event) {
     const rawValue = event.target.value;
-    const numericValue = parseInt(rawValue.replace(/,/g, ""), 10);
+    const numericValue = parseInt(rawValue.replace(/[$,]/g, ""), 10);
 
     setNewWager(isNaN(numericValue) ? 0 : numericValue);
   }
@@ -125,49 +125,52 @@ function AddNewBetForm({
 
   function handleDevBetSubmit(event) {
     event.preventDefault();
-
-    if (selectedRadioValue === "Current") {
-      const currentData = {
-        amount: +newWager,
-        bet_name: newBet,
-        bet_type: "weekly",
-        odds: newBetOdds,
-        user_id: devUserId,
-        week: week,
-        winnings: newWinnings,
-      };
-
-      fetch(`/api/${devUserId}/current-weekly-bets`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(currentData),
-      })
-        .then((resp) => resp.json())
-        .then((returnData) => {
-          setWeeklyBetList((prevBetList) => [...prevBetList, returnData]);
-          setShowAddBet(false);
-        });
+    if (!devUserId) {
+      alert("You have not selected a player for this bet");
     } else {
-      const futureData = {
-        amount: +newWager,
-        bet_name: newBet,
-        bet_type: "futures",
-        odds: newBetOdds,
-        user_id: devUserId,
-        week: week,
-        winnings: newWinnings,
-      };
+      if (selectedRadioValue === "Current") {
+        const currentData = {
+          amount: +newWager,
+          bet_name: newBet,
+          bet_type: "weekly",
+          odds: newBetOdds,
+          user_id: devUserId,
+          week: week,
+          winnings: newWinnings,
+        };
 
-      fetch(`/api/${devUserId}/current-futures-bets`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(futureData),
-      }).then((resp) => resp.json());
-      setShowAddBet(false);
+        fetch(`/api/${devUserId}/current-weekly-bets`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(currentData),
+        })
+          .then((resp) => resp.json())
+          .then((returnData) => {
+            setWeeklyBetList((prevBetList) => [...prevBetList, returnData]);
+            setShowAddBet(false);
+          });
+      } else {
+        const futureData = {
+          amount: +newWager,
+          bet_name: newBet,
+          bet_type: "futures",
+          odds: newBetOdds,
+          user_id: devUserId,
+          week: week,
+          winnings: newWinnings,
+        };
+
+        fetch(`/api/${devUserId}/current-futures-bets`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(futureData),
+        }).then((resp) => resp.json());
+        setShowAddBet(false);
+      }
     }
   }
 
