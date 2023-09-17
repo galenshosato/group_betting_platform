@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import ReducedBetCard from "./ReducedBetCard";
 import Container from "react-bootstrap/esm/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/esm/Button";
 import "../css/allbets.css";
 
@@ -30,7 +28,7 @@ function AllBetsPage({ week, groupAndSort }) {
     <>
       <h1
         className="text-color"
-        style={{ marginLeft: "15.5%", marginBottom: "4%", marginTop: "20px" }}
+        style={{ marginLeft: "15.5%", marginBottom: "2%", marginTop: "20px" }}
       >
         Week {week}
       </h1>
