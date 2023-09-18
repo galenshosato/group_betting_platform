@@ -103,6 +103,7 @@ def get_users():
         dev.week += 1
         for user in users:
             user.weekly_money = 100000
+            user.money += 100000
         db.session.add_all(users)
         db.session.add(dev)
         db.session.commit()
