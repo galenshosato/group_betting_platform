@@ -3,9 +3,9 @@ from flask import (
     jsonify,
     request,
     make_response,
-    Response,
     session as browser_session,
 )
+import bcrypt
 from extensions import *
 from models import User, Bet
 from datetime import datetime
@@ -34,12 +34,10 @@ def login():
         data = request.get_json()
         email = data.get("email")
         password = data.get("password")
-        user = User.query.filter(
-            User.email == email and User.password == password
-        ).first()
+        user = User.query.filter(User.email == email).first()
 
-        if not user:
-            return make_response(jsonify({"error": "invalid login"}))
+        if not user or not bcrypt.checkpw(password.encode("utf-8"), user.password):
+            return make_response(jsonify({"error": "invalid login"}), 401)
         browser_session["user_id"] = user.id
 
         return make_response(jsonify(user.to_dict()), 201)
@@ -47,6 +45,10 @@ def login():
 
 @app.route("/api/check_session")
 def get_user():
+    user_id = browser_session.get("user_id")
+    if user_id is None:
+        return jsonify({"message": "401:Not Authorized"}), 401
+
     user = User.query.filter(User.id == browser_session.get("user_id")).first()
 
     if user:
@@ -78,15 +80,17 @@ def change_password():
         return jsonify({"message": "User not found"}), 404
 
     # Check if the old password is the same as the new password
-    if user.password == new_password:
+    if bcrypt.checkpw(new_password.encode("utf-8"), user.password):
         return (
             jsonify({"message": "Password is the same. Please choose a new password"}),
             401,
         )
 
     # Update the password
-    user.password = new_password
+    hashed_new_password = bcrypt.hashpw(new_password.encode("utf-8"), bcrypt.gensalt())
+    user.password = hashed_new_password
     db.session.commit()
+
     return make_response(jsonify(user.to_dict()), 200)
 
 
