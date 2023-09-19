@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 function BetHistoryDropdown({ week, dropDownArray, setPastBetList }) {
   const [pastSelectedOption, setPastSelectedOption] = useState(
     week > 1 ? `Week ${week - 1}` : "Week 1"
   );
+
+  useEffect(() => {
+    setPastSelectedOption(week > 1 ? `Week ${week - 1}` : "Week 1");
+  }, [week]);
 
   function handlePastBetOption(value) {
     setPastSelectedOption(value);
