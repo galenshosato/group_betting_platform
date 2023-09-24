@@ -5,6 +5,7 @@ from flask import (
     make_response,
     session as browser_session,
 )
+from flask_cors import CORS, cross_origin
 import bcrypt
 from extensions import *
 from models import User, Bet
@@ -12,7 +13,8 @@ from datetime import datetime
 from config import DATABASE_URI
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="../client/build", static_url_path="/")
+cors = CORS(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 # app.config["SQLALCHEMY_ECHO"] = True
@@ -24,7 +26,7 @@ migrate.init_app(app, db)
 
 @app.route("/")
 def home():
-    return "Welcome to the Fake Betting API"
+    return app.send_static_file("index.html")
 
 
 # Routes for logging in, checking cookies, and logout
@@ -289,4 +291,4 @@ def get_bet(id, bet_id):
 
 
 if __name__ == "__main__":
-    app.run(host="localhost", port=5555, debug=True)
+    app.run(port=5555, debug=True)

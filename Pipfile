@@ -13,6 +13,8 @@ flask-testing = "*"
 bcrypt = "*"
 mysql-connector-python = "*"
 mysql-connector = "*"
+flask-cors = "*"
+gunicorn = "*"
 
 [dev-packages]
 
