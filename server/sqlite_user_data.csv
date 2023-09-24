@@ -1,8 +1,0 @@
-"['id', 'name', 'email', 'password', 'money', 'weekly_money', 'futures_money', 'week', 'created_at', 'updated_at']"
-1,dev,dev@dev.com,b'$2b$12$B2.GSVj8dy7RGur7gJivSuNijB5HxFXe/oPlvwaYlzGDRukpFJOsi',100000,100000,40000,3,2023-09-08 03:29:43,2023-09-08 03:29:43
-2,Galen,galen.sato@gmail.com,b'$2b$12$j5PkW9g5HqdOyEVDRYO.d.tLejzISQC2q8Bf4X12iScJiNq5tZm.a',384602,100000,0,,2023-09-08 03:29:43,2023-09-08 03:29:43
-3,Chris,chris.lanehart@gmail.com,b'$2b$12$TDSctP1rYZwFgszBzS8oVuVobmLCWr7LTnTNfXJh3mvyjVvWGen9u',366635,100000,0,,2023-09-08 03:29:43,2023-09-08 03:29:43
-4,Grant,grant.markin@gmail.com,b'$2b$12$CXMDa.Om352XF57JqDAMtufo15yGDoO16p5zNQlRvdTrEmDKB3aKS',313984,100000,0,,2023-09-08 03:29:43,2023-09-08 03:29:43
-5,Morgan,morgantschlesinger@gmail.com,b'$2b$12$NacSF9.6zZr/Q0C4qlKcXO/HYvPxGpl.3CeLL91KVFihWJo4I5IGO',188720,100000,0,,2023-09-08 03:29:43,2023-09-08 03:29:43
-6,Ethan,ethan.totten@gmail.com,b'$2b$12$QYd5hruXJvVCKQPCqd9kYu4wxBC30bR6IQgdqCZ.uFi3h3vjNzq6q',236381,100000,0,,2023-09-08 03:29:43,2023-09-08 03:29:43
-7,Alex,aaspear1@gmail.com,b'$2b$12$6.fdrID1.d1APuCmY/wTKefcopizW7w5p3muWSND1o/WqkYV3wB1q',299814,100000,0,,2023-09-08 03:29:43,2023-09-08 03:29:43

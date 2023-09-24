@@ -11,8 +11,13 @@ function ChangePasswordModal({
   showLogin,
   setShowLogin,
 }) {
+  const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [newPassConfirm, setNewPassConfirm] = useState("");
+
+  function oldPassChange(e) {
+    setOldPass(e.target.value);
+  }
 
   function newPassChange(e) {
     setNewPass(e.target.value);
@@ -30,14 +35,15 @@ function ChangePasswordModal({
       alert("Password does not match! Please re-enter matching passwords");
     } else if (newPass.length < 1) {
       alert("Please enter a valid new password");
+    } else if (oldPass.length < 1) {
+      alert("Please enter your current password");
     }
 
     const data = {
       email: email,
+      current_password: oldPass,
       new_password: newPass,
     };
-
-    console.log(data);
 
     fetch("/api/change_pass", {
       method: "POST",
@@ -45,11 +51,22 @@ function ChangePasswordModal({
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    }).then((resp) => {
-      if (resp.ok) {
-        setShowLogin(true);
-      }
-    });
+    })
+      .then((resp) => {
+        if (resp.ok) {
+          setShowLogin(true);
+        } else if (resp.status === 401) {
+          alert("Unauthorized: Please check your password");
+        } else if (resp.status === 404) {
+          alert("Invalid Email: Please enter a valid email.");
+        } else {
+          alert("An unexpected error occurred.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("An unexpected error occurred.");
+      });
 
     setShowChangePassword(false);
   }
@@ -66,6 +83,15 @@ function ChangePasswordModal({
             <Form.Group controlId="userEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control type="text" placeholder="Enter email" autoFocus />
+            </Form.Group>
+            <br></br>
+            <Form.Group controlId="currentPassword">
+              <Form.Label>Current Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Enter password"
+                onChange={oldPassChange}
+              />
             </Form.Group>
             <br></br>
             <Form.Group controlId="newPassword">

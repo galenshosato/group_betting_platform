@@ -9,15 +9,15 @@ import bcrypt
 from extensions import *
 from models import User, Bet
 from datetime import datetime
+from config import DATABASE_URI
 
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
-# mysql://username:password@host:port/database_name for mySQL
+app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# app.config["SQLALCHEMY_ECHO"] = True
 app.json.compact = False
 app.secret_key = "woohoo secret key"
-
 db.init_app(app)
 migrate.init_app(app, db)
 
@@ -36,7 +36,11 @@ def login():
         password = data.get("password")
         user = User.query.filter(User.email == email).first()
 
-        if not user or not bcrypt.checkpw(password.encode("utf-8"), user.password):
+        encoded_password = password.encode("utf-8")
+
+        if not user or not bcrypt.checkpw(
+            encoded_password, user.password.encode("utf-8")
+        ):
             return make_response(jsonify({"error": "invalid login"}), 401)
         browser_session["user_id"] = user.id
 
@@ -73,14 +77,21 @@ def change_password():
     data = request.get_json()
     email = data.get("email")
     new_password = data.get("new_password")
+    current_password = data.get("current_password")
 
     # Find the user in the database
     user = User.query.filter_by(email=email).first()
     if not user:
         return jsonify({"message": "User not found"}), 404
 
+    # Checking password as well
+    if bcrypt.checkpw(current_password.encode("utf-8"), user.password.encode("utf-8")):
+        return make_response(
+            jsonify({"message": "Please enter the correct password"}), 401
+        )
+
     # Check if the old password is the same as the new password
-    if bcrypt.checkpw(new_password.encode("utf-8"), user.password):
+    if bcrypt.checkpw(new_password.encode("utf-8"), user.password.encode("utf-8")):
         return (
             jsonify({"message": "Password is the same. Please choose a new password"}),
             401,
@@ -278,4 +289,4 @@ def get_bet(id, bet_id):
 
 
 if __name__ == "__main__":
-    app.run(port=5555, debug=True)
+    app.run(host="localhost", port=5555, debug=True)

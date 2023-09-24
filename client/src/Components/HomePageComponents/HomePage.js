@@ -7,8 +7,8 @@ function HomePage({ week }) {
     <>
       <h1 id="weekNumber">Week {week}</h1>
       <RankingList week={week} />
-      <WeeklySound />
-      <WeeklyScript />
+      {/* <WeeklySound />
+      <WeeklyScript /> */}
     </>
   );
 }

@@ -11,6 +11,8 @@ sqlalchemy = "*"
 pytest = "*"
 flask-testing = "*"
 bcrypt = "*"
+mysql-connector-python = "*"
+mysql-connector = "*"
 
 [dev-packages]
 

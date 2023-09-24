@@ -46,7 +46,7 @@ function BetHistory({ week, groupAndSort }) {
             </div>
           ))
         ) : (
-          <h1 className="text-color">No Past Bets Available</h1>
+          <h1 className="text-color">Loading Bets...</h1>
         )}
       </Container>
     </>
