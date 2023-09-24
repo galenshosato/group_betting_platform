@@ -7,10 +7,10 @@ from flask import (
 )
 from flask_cors import CORS, cross_origin
 import bcrypt
-from extensions import *
-from models import User, Bet
+from server.extensions import *
+from server.models import User, Bet
 from datetime import datetime
-from config import DATABASE_URI
+from server.config import DATABASE_URI
 
 
 app = Flask(__name__, static_folder="../client/build", static_url_path="/")
