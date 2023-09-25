@@ -7,13 +7,14 @@ from flask import (
 )
 from flask_cors import CORS, cross_origin
 import bcrypt
-from server.extensions import *
-from server.models import User, Bet
+from extensions import *
+from models import User, Bet
 from datetime import datetime
-from server.configure import DATABASE_URI
+
+from configure import DATABASE_URI
 
 
-app = Flask(__name__, static_folder="../client/build", static_url_path="/")
+app = Flask(__name__)
 cors = CORS(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -22,11 +23,12 @@ app.json.compact = False
 app.secret_key = "woohoo secret key"
 db.init_app(app)
 migrate.init_app(app, db)
+# , static_folder="../client/build", static_url_path="/"
 
 
 @app.route("/")
 def home():
-    return app.send_static_file("index.html")
+    return "Fake Betting API"
 
 
 # Routes for logging in, checking cookies, and logout
@@ -291,4 +293,4 @@ def get_bet(id, bet_id):
 
 
 if __name__ == "__main__":
-    app.run(port=5555, debug=True)
+    app.run(host="localhost", port="5555", debug=True)
