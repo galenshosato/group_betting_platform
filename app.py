@@ -7,11 +7,11 @@ from flask import (
 )
 from flask_cors import CORS, cross_origin
 import bcrypt
-from extensions import *
-from models import User, Bet
+from server import db, migrate, User, Bet, DATABASE_URI
 from datetime import datetime
 
-from configure import DATABASE_URI
+# from models import User, Bet
+# from configure import DATABASE_URI
 
 
 app = Flask(__name__)
@@ -23,12 +23,11 @@ app.json.compact = False
 app.secret_key = "woohoo secret key"
 db.init_app(app)
 migrate.init_app(app, db)
-# , static_folder="../client/build", static_url_path="/"
 
 
 @app.route("/")
 def home():
-    return "Fake Betting API"
+    return "Group Gamble API"
 
 
 # Routes for logging in, checking cookies, and logout
