@@ -2,7 +2,7 @@ import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
-import ParlayForm from "./ParlayForm";
+// import ParlayForm from "./ParlayForm";
 import DevDropdown from "../DevTools/DevDropdown";
 
 function AddNewBetForm({
@@ -24,7 +24,7 @@ function AddNewBetForm({
   const [newWager, setNewWager] = useState(0);
   const [newWinnings, setNewWinnings] = useState(0);
   // const [showParlayForm, setShowParlayForm] = useState(false);
-  const [parlayArr, setParlayArr] = useState([]);
+  // const [parlayArr, setParlayArr] = useState([]);
   const [devUserId, setDevUserId] = useState(null);
 
   useEffect(() => {
