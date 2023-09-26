@@ -16,7 +16,9 @@ function App() {
   const [showAddBet, setShowAddBet] = useState(false);
 
   useEffect(() => {
-    fetch("/api/check_session").then((resp) => {
+    fetch(
+      "https://group-gamble-d231ef097ad5.herokuapp.com/api/check_session"
+    ).then((resp) => {
       if (resp.ok) {
         resp.json().then((user) => setCurrentUser(user));
       }
@@ -24,7 +26,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch("/api/user/1")
+    fetch("https://group-gamble-d231ef097ad5.herokuapp.com/api/user/1")
       .then((resp) => resp.json())
       .then((data) => setWeek(data.week));
   }, []);

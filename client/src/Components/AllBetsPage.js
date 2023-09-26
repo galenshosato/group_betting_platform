@@ -10,13 +10,13 @@ function AllBetsPage({ week, groupAndSort }) {
   const [showFutures, setShowFutures] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/${week}/bets`)
+    fetch(`https://group-gamble-d231ef097ad5.herokuapp.com/api/${week}/bets`)
       .then((resp) => resp.json())
       .then((data) => setAllCurrentUsersBets(data));
   }, [week]);
 
   useEffect(() => {
-    fetch("/api/get-future-bets")
+    fetch("https://group-gamble-d231ef097ad5.herokuapp.com/api/get-future-bets")
       .then((resp) => resp.json())
       .then((data) => setAllFuturesUserBets(data));
   }, []);

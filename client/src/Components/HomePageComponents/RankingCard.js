@@ -10,8 +10,6 @@ function RankingCard({ user, week, rank }) {
   upPercentage = Math.round(upPercentage * 10) / 10;
   downPercentage = Math.round(downPercentage * 10) / 10;
 
-  console.log(total);
-
   return (
     <>
       <Card className="ranking-card" bg="dark" border="warning">

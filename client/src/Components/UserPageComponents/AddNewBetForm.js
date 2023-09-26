@@ -77,13 +77,16 @@ function AddNewBetForm({
       } else {
         setUserWeeklyMoney(newWeeklyMoney);
 
-        fetch(`/api/${id}/current-weekly-bets`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(currentData),
-        })
+        fetch(
+          `https://group-gamble-d231ef097ad5.herokuapp.com/api/${id}/current-weekly-bets`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(currentData),
+          }
+        )
           .then((resp) => resp.json())
           .then((returnData) => {
             setBetList((prevBetList) => [...prevBetList, returnData]);
@@ -107,13 +110,16 @@ function AddNewBetForm({
       } else {
         setUserFuturesMoney(newFuturesMoney);
 
-        fetch(`/api/${id}/current-futures-bets`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(futureData),
-        })
+        fetch(
+          `https://group-gamble-d231ef097ad5.herokuapp.com/api/${id}/current-futures-bets`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(futureData),
+          }
+        )
           .then((resp) => resp.json())
           .then((returnData) => {
             setFuturesList((prevBetList) => [...prevBetList, returnData]);
@@ -139,13 +145,16 @@ function AddNewBetForm({
           winnings: newWinnings,
         };
 
-        fetch(`/api/${devUserId}/current-weekly-bets`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(currentData),
-        })
+        fetch(
+          `https://group-gamble-d231ef097ad5.herokuapp.com/api/${devUserId}/current-weekly-bets`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(currentData),
+          }
+        )
           .then((resp) => resp.json())
           .then((returnData) => {
             setWeeklyBetList((prevBetList) => [...prevBetList, returnData]);
@@ -162,13 +171,16 @@ function AddNewBetForm({
           winnings: newWinnings,
         };
 
-        fetch(`/api/${devUserId}/current-futures-bets`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(futureData),
-        }).then((resp) => resp.json());
+        fetch(
+          `https://group-gamble-d231ef097ad5.herokuapp.com/api/${devUserId}/current-futures-bets`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(futureData),
+          }
+        ).then((resp) => resp.json());
         setShowAddBet(false);
       }
     }

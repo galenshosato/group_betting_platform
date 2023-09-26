@@ -17,14 +17,16 @@ function DevBetList({
   const [weeklyBetList, setWeeklyBetList] = useState([]);
 
   useEffect(() => {
-    fetch(`/api/${week}/get-current-bets`)
+    fetch(
+      `https://group-gamble-d231ef097ad5.herokuapp.com/api/${week}/get-current-bets`
+    )
       .then((resp) => resp.json())
       .then((data) => setWeeklyBetList(data));
   }, [week]);
 
   function handleWeekUpdate() {
     setWeek((prev) => prev + 1);
-    fetch("/api/users", {
+    fetch("https://group-gamble-d231ef097ad5.herokuapp.com/api/users", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

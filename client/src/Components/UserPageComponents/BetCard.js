@@ -40,25 +40,31 @@ function BetCard({
 
   function handleBetDelete() {
     if (bet.bet_type === "weekly") {
-      fetch(`/api/${user_id}/currentbet/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ bet_type: "weekly" }),
-      });
+      fetch(
+        `https://group-gamble-d231ef097ad5.herokuapp.com/api/${user_id}/currentbet/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ bet_type: "weekly" }),
+        }
+      );
       let newWeekly = weekly_money + parseFloat(amount);
       setUserWeeklyMoney(newWeekly);
       const updatedBetList = betList.filter((bet) => bet.id !== id);
       setBetList(updatedBetList);
     } else {
-      fetch(`/api/${user_id}/currentbet/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ bet_type: "future" }),
-      });
+      fetch(
+        `https://group-gamble-d231ef097ad5.herokuapp.com/api/${user_id}/currentbet/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ bet_type: "future" }),
+        }
+      );
       let newFutures = futures_money + parseFloat(amount);
       setUserFuturesMoney(newFutures);
       const updatedFuturesList = futuresList.filter((bet) => bet.id !== id);
@@ -69,13 +75,16 @@ function BetCard({
   function changeBetSuccess(event) {
     let newSuccessType = event.target.value;
     let newCardClass = "";
-    fetch(`/api/${user_id}/currentbet/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ hit: newSuccessType }),
-    });
+    fetch(
+      `https://group-gamble-d231ef097ad5.herokuapp.com/api/${user_id}/currentbet/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ hit: newSuccessType }),
+      }
+    );
 
     switch (newSuccessType) {
       case "hit":

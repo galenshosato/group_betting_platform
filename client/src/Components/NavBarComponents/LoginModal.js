@@ -20,7 +20,7 @@ function LoginModal({ setCurrentUser, currentUser }) {
       password: password,
     };
 
-    fetch("/api/login", {
+    fetch("https://group-gamble-d231ef097ad5.herokuapp.com/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -9,7 +9,11 @@ function BetHistory({ week, groupAndSort }) {
 
   useEffect(() => {
     if (week > 1) {
-      fetch(`/api/${week - 1}/get-past-bets`)
+      fetch(
+        `https://group-gamble-d231ef097ad5.herokuapp.com/api/${
+          week - 1
+        }/get-past-bets`
+      )
         .then((resp) => resp.json())
         .then((data) => setPastBetList(data));
     }

@@ -11,7 +11,9 @@ function FutureBetList({
   currentUser,
 }) {
   useEffect(() => {
-    fetch(`/api/${id}/current-futures-bets`)
+    fetch(
+      `https://group-gamble-d231ef097ad5.herokuapp.com/api/${id}/current-futures-bets`
+    )
       .then((resp) => resp.json())
       .then((data) => setFuturesList(data));
   }, [id, setFuturesList]);

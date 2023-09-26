@@ -6,7 +6,7 @@ function RankingList({ week }) {
   const [sortedUsers, setSortedUsers] = useState([]);
 
   useEffect(() => {
-    fetch("/api/users")
+    fetch("https://group-gamble-d231ef097ad5.herokuapp.com/api/users")
       .then((resp) => resp.json())
       .then((data) => {
         const filteredUsers = data.filter((user) => user.name !== "dev");

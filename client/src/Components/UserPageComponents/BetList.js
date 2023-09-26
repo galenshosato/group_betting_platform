@@ -20,7 +20,9 @@ function BetList({
   const [betList, setBetList] = useState([]);
 
   useEffect(() => {
-    fetch(`/api/${id}/current-weekly-bets`)
+    fetch(
+      `https://group-gamble-d231ef097ad5.herokuapp.com/api/${id}/current-weekly-bets`
+    )
       .then((resp) => resp.json())
       .then((data) => setBetList(data));
   }, [id]);

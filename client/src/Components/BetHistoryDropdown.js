@@ -12,7 +12,11 @@ function BetHistoryDropdown({ week, dropDownArray, setPastBetList }) {
   function handlePastBetOption(value) {
     setPastSelectedOption(value);
 
-    fetch(`/api/${value.split(" ")[1]}/get-past-bets`)
+    fetch(
+      `https://group-gamble-d231ef097ad5.herokuapp.com/api/${
+        value.split(" ")[1]
+      }/get-past-bets`
+    )
       .then((resp) => resp.json())
       .then((data) => setPastBetList(data));
   }

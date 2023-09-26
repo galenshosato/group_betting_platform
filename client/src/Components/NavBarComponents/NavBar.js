@@ -12,7 +12,7 @@ function NavBar({ currentUser, setCurrentUser, week }) {
   const navigate = useNavigate();
 
   function handleLogout() {
-    fetch("/api/logout", {
+    fetch("https://group-gamble-d231ef097ad5.herokuapp.com/api/logout", {
       method: "POST",
     });
     setCurrentUser({});

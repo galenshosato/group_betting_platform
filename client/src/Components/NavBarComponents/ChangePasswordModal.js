@@ -45,7 +45,7 @@ function ChangePasswordModal({
       new_password: newPass,
     };
 
-    fetch("/api/change_pass", {
+    fetch("https://group-gamble-d231ef097ad5.herokuapp.com/api/change_pass", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

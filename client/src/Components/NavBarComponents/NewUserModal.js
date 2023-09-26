@@ -19,7 +19,7 @@ function NewUserModal() {
       money: 100000,
     };
 
-    fetch("/api/users", {
+    fetch("https://group-gamble-d231ef097ad5.herokuapp.com/api/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
