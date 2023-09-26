@@ -1,6 +1,6 @@
 import RankingList from "./RankingList";
-import WeeklyScript from "./WeeklyScript";
-import WeeklySound from "./WeeklySound";
+// import WeeklyScript from "./WeeklyScript";
+// import WeeklySound from "./WeeklySound";
 
 function HomePage({ week }) {
   return (

@@ -32,7 +32,7 @@ function UserPage({ currentUser, week, setShowAddBet, showAddBet }) {
         currentUser.weekly_money.toString()
       );
     }
-  }, [currentUser.weekly_money]);
+  }, [currentUser.weekly_money, userWeeklyMoney]);
 
   useEffect(() => {
     // Update userFuturesMoney when currentUser.futures_money changes
@@ -46,7 +46,7 @@ function UserPage({ currentUser, week, setShowAddBet, showAddBet }) {
         currentUser.futures_money.toString()
       );
     }
-  }, [currentUser.futures_money]);
+  }, [currentUser.futures_money, userFuturesMoney]);
 
   return (
     <>

@@ -174,14 +174,14 @@ function AddNewBetForm({
     }
   }
 
-  function handleParlay() {
-    const betData = {
-      name: newBet,
-      odds: +newBetOdds,
-    };
-    setParlayArr((prevArr) => [...prevArr, betData]);
-    setShowParlayForm(true);
-  }
+  // function handleParlay() {
+  //   const betData = {
+  //     name: newBet,
+  //     odds: +newBetOdds,
+  //   };
+  //   setParlayArr((prevArr) => [...prevArr, betData]);
+  //   setShowParlayForm(true);
+  // }
 
   return (
     <>

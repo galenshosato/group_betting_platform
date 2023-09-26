@@ -64,11 +64,9 @@ function NewUserModal() {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <a>
-            <Button className="custom-btn" onClick={handleSubmit}>
-              Add User
-            </Button>
-          </a>
+          <Button className="custom-btn" onClick={handleSubmit}>
+            Add User
+          </Button>
         </Modal.Footer>
       </Modal>
     </>
