@@ -23,7 +23,7 @@ function AddNewBetForm({
   const [newBetOdds, setNewBetOdds] = useState(0);
   const [newWager, setNewWager] = useState(0);
   const [newWinnings, setNewWinnings] = useState(0);
-  const [showParlayForm, setShowParlayForm] = useState(false);
+  // const [showParlayForm, setShowParlayForm] = useState(false);
   const [parlayArr, setParlayArr] = useState([]);
   const [devUserId, setDevUserId] = useState(null);
 
@@ -278,7 +278,7 @@ function AddNewBetForm({
           {/* <Button onClick={handleParlay}>Parlay</Button> */}
         </Card.Body>
       </Card>
-      {showParlayForm ? (
+      {/* {showParlayForm ? (
         <ParlayForm
           parlayArr={parlayArr}
           setParlayArr={setParlayArr}
@@ -286,7 +286,7 @@ function AddNewBetForm({
           setNewBetOdds={setNewBetOdds}
           setNewBet={setNewBet}
         />
-      ) : null}
+      ) : null} */}
     </>
   );
 }
