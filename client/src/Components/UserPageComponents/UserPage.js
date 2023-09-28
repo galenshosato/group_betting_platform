@@ -32,7 +32,8 @@ function UserPage({ currentUser, week, setShowAddBet, showAddBet }) {
         currentUser.weekly_money.toString()
       );
     }
-  }, [currentUser.weekly_money, userWeeklyMoney]);
+    // eslint-disable-next-line
+  }, [currentUser.weekly_money]);
 
   useEffect(() => {
     // Update userFuturesMoney when currentUser.futures_money changes
@@ -46,7 +47,8 @@ function UserPage({ currentUser, week, setShowAddBet, showAddBet }) {
         currentUser.futures_money.toString()
       );
     }
-  }, [currentUser.futures_money, userFuturesMoney]);
+    // eslint-disable-next-line
+  }, [currentUser.futures_money]);
 
   return (
     <>
