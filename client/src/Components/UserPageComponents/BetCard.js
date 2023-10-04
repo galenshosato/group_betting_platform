@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/esm/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../../css/userPage.css";
 
 function BetCard({
@@ -17,6 +17,8 @@ function BetCard({
   setFuturesList,
 }) {
   const [cardClass, setCardClass] = useState("");
+  const [userFont, setUserFont] = useState(16);
+  const userBetNameRef = useRef(null);
   const { amount, bet_name, odds, winnings, id, user_id } = bet;
 
   useEffect(() => {
@@ -102,6 +104,41 @@ function BetCard({
     setCardClass(newCardClass);
   }
 
+  useEffect(() => {
+    // Function to calculate the maximum allowed font size
+    function calculateMaxFontSize(containerWidth, containerHeight) {
+      const textElement = userBetNameRef.current;
+      if (!textElement) return; // Ensure the text element exists
+
+      const textWidth = textElement.offsetWidth;
+      const textHeight = textElement.offsetHeight;
+
+      const widthRatio = containerWidth / textWidth;
+      const heightRatio = containerHeight / textHeight;
+
+      // Use the smaller of the two ratios to ensure text fits both width and height
+      let newFontSize = Math.min(widthRatio, heightRatio) * userFont;
+
+      // Limit the font size to a maximum of 16px
+      newFontSize = Math.min(newFontSize, 16);
+
+      setUserFont(newFontSize);
+    }
+
+    // Call the calculateMaxFontSize function when the component mounts and when bet.bet_name changes
+    calculateMaxFontSize(419, 27.27);
+    window.addEventListener("resize", () => {
+      calculateMaxFontSize(419, 27.27);
+    });
+
+    return () => {
+      window.removeEventListener("resize", () => {
+        calculateMaxFontSize(419, 27.27);
+      });
+    };
+    // eslint-disable-next-line
+  }, [bet.bet_name]);
+
   return (
     <>
       <Card
@@ -111,7 +148,13 @@ function BetCard({
       >
         <Card.Body>
           <div className="name-odds">
-            <h3>{bet_name}</h3>
+            <h3
+              style={{ fontSize: `${userFont}px` }}
+              ref={userBetNameRef}
+              className="user-bet-name"
+            >
+              {bet_name}
+            </h3>
             {odds > 0 ? <h3>+{odds}</h3> : <h3> {odds}</h3>}
           </div>
           <div className="amount-winnings">
