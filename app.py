@@ -51,6 +51,7 @@ def login():
 
 
 @app.route("/api/check_session")
+@cross_origin(supports_credentials=True)
 def get_user():
     user_id = browser_session.get("user_id")
     if user_id is None:
