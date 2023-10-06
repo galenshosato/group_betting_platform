@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 function LoginModal({ setCurrentUser, currentUser }) {
   const [showLogin, setShowLogin] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
+  const [loginError, setLoginError] = useState(false);
   const navigate = useNavigate();
 
   function handleSubmit(event) {
@@ -27,13 +28,22 @@ function LoginModal({ setCurrentUser, currentUser }) {
       },
       body: JSON.stringify(data),
     })
-      .then((resp) => resp.json())
+      .then((resp) => {
+        if (resp.status === 401) {
+          setLoginError(true);
+          document.getElementById("formBasicPassword").value = "";
+          return Promise.reject("Incorrect Password");
+        }
+        return resp.json();
+      })
       .then((data) => {
         setCurrentUser(data);
         navigate(`/${data.name}/weekly-bets`);
+        setShowLogin(false);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-
-    setShowLogin(false);
   }
 
   function handleClick() {
@@ -57,6 +67,9 @@ function LoginModal({ setCurrentUser, currentUser }) {
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Enter Password" />
+              {loginError ? (
+                <span id="login-error">Incorrect email or password</span>
+              ) : null}
             </Form.Group>
             <div id="change-password">
               <span onClick={handleClick}>Change Password?</span>
@@ -64,9 +77,7 @@ function LoginModal({ setCurrentUser, currentUser }) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <a href={`/${currentUser.name}/weekly-bets`}>
-            <Button onClick={handleSubmit}>Login</Button>
-          </a>
+          <Button onClick={handleSubmit}>Login</Button>
         </Modal.Footer>
       </Modal>
       {showChangePassword ? (
