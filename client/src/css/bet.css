@@ -1,5 +1,5 @@
 .hit-bg {
-  background-color: green;
+  background-color: #00b300;
 }
 
 .push-bg {
@@ -7,5 +7,5 @@
 }
 
 .miss-bg {
-  background-color: red;
+  background-color: rgb(249, 27, 27);
 }

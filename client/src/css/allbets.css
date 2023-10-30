@@ -47,7 +47,7 @@ h3 {
 }
 
 .hit-bg {
-  background-color: green;
+  background-color: #00b300;
 }
 
 .push-bg {
@@ -55,5 +55,5 @@ h3 {
 }
 
 .miss-bg {
-  background-color: red;
+  background-color: rgb(249, 27, 27);
 }
